@@ -8,8 +8,17 @@ public class Cliente
     private string telefono;
     private string DatosRefCliente;
 
-    public string Nombre { get => nombre; set => nombre = value; }
-    public string Telefono { get => telefono; set => telefono = value; }
-    public string Direccion { get => direccion; set => direccion = value; }
+    public Cliente(string nom,string dire,string telefono,string datref)
+
+    {
+        nombre=nom;
+        direcciono=dire;
+    }
+
+    public string Nombre { get => nombre;  }
+    public string Telefono { get => telefono;  }
+    public string Direccion { get => direccion;  }
+    
     public string DatosRefCliente1 { get => DatosRefCliente; set => DatosRefCliente = value; }
+
 }
