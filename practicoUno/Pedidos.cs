@@ -17,9 +17,9 @@ public class Pedidos
         
 
     } 
-    public Pedidos ( string observacion,  string nomcli, string clidire){
+    public Pedidos ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){
        this.nroPedido = id ++;
-       cliente=new Clientes(nomcli,clidre);
+       clienteNuevo=new Cliente(nomcli, clidire, cliTelefono, cliDatRef);
 
 
 
@@ -28,12 +28,12 @@ public class Pedidos
     public string Observacion { get => observacion; set => observacion = value; }
     public bool Entregado { get => entregado; set => entregado = value; }
 
-    public void VerDireccionCliente (){ 
-        Console.WriteLine(" la direccion del cliente es  " + clienteNuevo.GetDireccion());
+    public  void VerDireccionCliente (){ 
+        Console.WriteLine(" la direccion del cliente es  " + clienteNuevo.Direccion());
 
     }
     public void VerDatosCliente (){ 
-        Console.WriteLine(" la direccion del cliente es  " + clienteNuevo.GetDireccion());
+        Console.WriteLine(" la direccion del cliente es  " + clienteNuevo.Direccion());
 
     }
 }
