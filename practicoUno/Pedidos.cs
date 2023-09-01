@@ -27,6 +27,9 @@ public class Pedidos
      public int NroPedido { get => nroPedido;  }
     public string Observacion { get => observacion; set => observacion = value; }
     public bool Entregado { get => entregado; set => entregado = value; }
+    public string NombreClien(){
+        return clienteNuevo.Nombre;
+    }
 
     public  void VerDireccionCliente (){ 
         Console.WriteLine(" la direccion del cliente es  " + clienteNuevo.Direccion());

@@ -11,8 +11,10 @@ public class Cliente
     public Cliente(string nom,string dire,string telefono,string datref)
 
     {
-        nombre=nom;
-        direccion=dire;
+        this.nombre=nom;
+        this.direccion=dire;
+        this.telefono = telefono; 
+        this.DatosRefCliente = datref;
     }
 
     public string Nombre { get => nombre;  }
