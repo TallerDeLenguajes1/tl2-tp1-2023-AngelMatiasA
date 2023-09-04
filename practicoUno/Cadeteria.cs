@@ -9,8 +9,21 @@ public class Cadeteria
     private Pedidos? nuevoPedido;
     private Cadete nuevoCadete;
    
+   
    public  Cadeteria(){
     Cadetes = new List<Cadete>(); 
+
+   }
+   // alta pedido llamando a la funcion del objeto cadete q a su vez llama a la funcion del obj pedido
+   public void altaPediCadeteria(int idCadete,string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){
+
+    foreach(var cad in Cadetes){
+
+        if (cad.Id==idCadete){
+            cad.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef );
+        }
+    }
+   
 
    }
 
@@ -49,24 +62,24 @@ public class Cadeteria
                 break;
             }
             //otraversion
-           foreach (Pedidos pedido in item.ListaPedidos)
-           {
-                if (pedido.NroPedido == idPedido)
-                {
-                    // item.ListaPedidos.
-                    break;
+        //    foreach (Pedidos pedido in item.ListaPedidos)
+        //    {
+        //         if (pedido.NroPedido == idPedido)
+        //         {
+        //             // item.ListaPedidos.
+        //             break;
                     
-                }
+        //         }
             
-           }
-            
-        }
-         if (pedidos !=null)
-        {
+        //    }
             
         }
+        //  if (pedidos !=null)
+        // {
+            
+        // }
        
-        asignarPedidos(NombreCadeteAsignar, pedidos );
+        // asignarPedidos(NombreCadeteAsignar, pedidos );
 
     
    }
