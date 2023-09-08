@@ -44,11 +44,12 @@ public class Cadete
         return sueldo;
     }
 
-    public Pedidos altaPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 
-        nuevoPedido = new Pedidos(observacion, nomcli, clidire, cliTelefono, cliDatRef );
-        return nuevoPedido;
+    //esta no se usaria porque hay q agregar pedido dependientemente del cadete
+    // public Pedidos altaPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 
+    //     nuevoPedido = new Pedidos(observacion, nomcli, clidire, cliTelefono, cliDatRef );
+    //     return nuevoPedido;
 
-    }
+    // }
     public void agregarPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 
         nuevoPedido = new Pedidos(observacion, nomcli, clidire, cliTelefono, cliDatRef );
         this.listaPedidos.Add(nuevoPedido);
@@ -82,6 +83,7 @@ public class Cadete
         }
         return nuevoPedido;
     }
+
 
      public void reasignarPedido ( Pedidos cambioPedido){ 
         

@@ -5,22 +5,24 @@ namespace EspacioCadeteria;
 
 public class Cadeteria
 {
-    private List<Cadete>? Cadetes ; 
+    private List<Cadete>? cadetes ; 
     private Pedidos? nuevoPedido;
-    private Cadete nuevoCadete;
-   
-   
-   public  Cadeteria(){
-    Cadetes = new List<Cadete>(); 
+    private Cadete? nuevoCadete; 
+    private string? nombreCadeteria;
+    private string? telefonoCadeteria;
+
+
+    public  Cadeteria(){
+    cadetes = new List<Cadete>(); 
 
    }
    // alta pedido llamando a la funcion del objeto cadete q a su vez llama a la funcion del obj pedido
    public void altaPediCadeteria(int idCadete,string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){
 
-    foreach(var cad in Cadetes){
+    foreach(var cad in cadetes){
 
         if (cad.Id==idCadete){
-            cad.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef );
+          //  cad.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef );
         }
     }
    
@@ -31,15 +33,19 @@ public class Cadeteria
    
     nuevoCadete = new Cadete(nombre, direccion, telefono );
 
-    Cadetes.Add(nuevoCadete);
+    this.cadetes.Add(nuevoCadete);
     //hacer tipom capa de datos para comunicar entre todos los objetos
     //similar a este metodo y a agregar pedido
 
     
 
    }
-   public void asignarPedidos(string nombreCadete, Pedidos pedido){
-    foreach (Cadete cadetePedido in Cadetes)
+       public string NombreCadeteria { get => nombreCadeteria; set => nombreCadeteria = value; }
+    public string TelefonoCadeteria { get => telefonoCadeteria; set => telefonoCadeteria = value; }
+    public List<Cadete>? Cadetes { get => Cadetes; set => Cadetes = value; }
+
+    public void asignarPedidos(string nombreCadete, Pedidos pedido){
+    foreach (Cadete cadetePedido in cadetes)
     {
         if (nombreCadete == cadetePedido.Nombre)
         {
@@ -51,16 +57,40 @@ public class Cadeteria
     }
     
    }
+   // le tendria que pasar el parametro List<Cadete> cadetesAMostrar
+   public  void  mostrarCadetes ( ){
+    foreach (Cadete Cadete in this.cadetes)
+    {
+        Console.WriteLine($"Cadete nro {Cadete.Id}");
+        Console.Write($"Nombre  {Cadete.Nombre}. ");
+        Console.Write($"Direccion {Cadete.Direccion}. ");
+        Console.Write($"Telefono: {Cadete.Telefono}. ");
+        Console.WriteLine("****************************************************");
+        
+    }
+
+   }
     public void reasignarPedidos(int idPedido, string NombreCadeteAsignar){
         Pedidos ? pedidos;
-        foreach (Cadete cadeteCancelado in Cadetes)
+        foreach (Cadete cadeteCancelado in cadetes)
         {
             //primera version
             pedidos =cadeteCancelado.RemoverPedido(idPedido);
             if (pedidos != null)
             {
-                break;
+                foreach (Cadete cadete in this.cadetes)
+            {
+                if (cadete.Nombre == NombreCadeteAsignar)
+                {
+                    cadete.asignarPedido(pedidos); 
+                }
+                
             }
+             
+            }
+            
+            //hacer un for each con la lista de cadetes para bscar el cadete a asignar. 
+            //y asignarle el pedido devuelto de la funcion anterior
             //otraversion
         //    foreach (Pedidos pedido in item.ListaPedidos)
         //    {
