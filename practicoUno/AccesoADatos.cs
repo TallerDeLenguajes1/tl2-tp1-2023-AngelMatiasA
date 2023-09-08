@@ -30,7 +30,7 @@ public class AccesoADatos
            // Cadete nuevoCadete = new Cadete();
             
              string pirmeraLinea = lector.ReadLine();
-             Console.WriteLine("primera linea" + pirmeraLinea);
+             Console.WriteLine("primera linea del metodo cargar cadetes" + pirmeraLinea);
              while (!lector.EndOfStream  )
              { 
                 Cadete nuevoCadete = new Cadete();
@@ -38,23 +38,49 @@ public class AccesoADatos
                 var values = linea.Split(';');
                
                 cadeteria.agregarCadete(values[0], values[1], values[2] );
+             }
+            
+        }
+    }
+
+     public List<Cadete> leerCadetes(string nombreArchivo){
+          List<Cadete> CadetesCsv = new List<Cadete>();  
+          
+        StreamReader lector =  existeCsv(nombreArchivo); 
+        if (lector!= null)
+        {   //tendria que estar aca o dentro del while la instanciacion?
+           // Cadete nuevoCadete = new Cadete();
+            
+             string pirmeraLinea = lector.ReadLine();
+             Console.WriteLine("primera linea y segunda" + pirmeraLinea);
+             while (!lector.EndOfStream  )
+             { 
+                Cadete nuevoCadete = new Cadete();
+                var linea = lector.ReadLine(); 
+                var values = linea.Split(';');
+                nuevoCadete.Nombre = values[0];
+                Console.WriteLine($"nombre desd el csv" + values[0]);
  
+
+                nuevoCadete.Direccion = values[1]; 
+                nuevoCadete.Telefono = values[2];  
                 
 
-               
+                CadetesCsv.Add(nuevoCadete);
                 
              }
+             
             
         }
        
 
-       
+        return CadetesCsv;
     }
 
 
     // se podria pasar x referencia? como? 
     // ahi podria hacer una condicion q devuelva true or false
-    public List<Cadete> leerCadetes(string nombreArchivo){
+ /*   public List<Cadete> leerCadetes(string nombreArchivo){
           List<Cadete> CadetesCsv = new List<Cadete>();  
           Cadeteria nueva = new Cadeteria();
         StreamReader lector =  existeCsv(nombreArchivo); 
@@ -87,7 +113,7 @@ public class AccesoADatos
 
         return CadetesCsv;
     }
-
+*/
     public void leerCsv(){
         StreamReader reader = new StreamReader(File.OpenRead(@"informe.csv"));
         if (reader != null)

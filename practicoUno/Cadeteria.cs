@@ -8,12 +8,12 @@ public class Cadeteria
     private List<Cadete>? cadetes ; 
     private Pedidos? nuevoPedido;
     private Cadete? nuevoCadete; 
-    private string? nombreCadeteria;
-    private string? telefonoCadeteria;
+    private string nombreCadeteria = "";
+    private string telefonoCadeteria ="";
 
 
-    public  Cadeteria(){
-    cadetes = new List<Cadete>(); 
+    public  Cadeteria(List<Cadete> LisCadetes){
+    this.cadetes = LisCadetes; 
 
    }
    // alta pedido llamando a la funcion del objeto cadete q a su vez llama a la funcion del obj pedido
@@ -22,7 +22,7 @@ public class Cadeteria
     foreach(var cad in cadetes){
 
         if (cad.Id==idCadete){
-          //  cad.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef );
+           cad.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef );
         }
     }
    
@@ -33,7 +33,7 @@ public class Cadeteria
    
     nuevoCadete = new Cadete(nombre, direccion, telefono );
 
-    this.cadetes.Add(nuevoCadete);
+        this.cadetes.Add(nuevoCadete);
     //hacer tipom capa de datos para comunicar entre todos los objetos
     //similar a este metodo y a agregar pedido
 
@@ -42,8 +42,13 @@ public class Cadeteria
    }
        public string NombreCadeteria { get => nombreCadeteria; set => nombreCadeteria = value; }
     public string TelefonoCadeteria { get => telefonoCadeteria; set => telefonoCadeteria = value; }
-    public List<Cadete>? Cadetes { get => Cadetes; set => Cadetes = value; }
-
+    //public List<Cadete>? Cadetes { get => Cadetes; set => Cadetes = value; }
+    /*public void CargaInicialCadetes(List<Cadete> LisCadetes)
+    {
+        this.cadetes=LisCadetes;    
+    }
+*/
+    
     public void asignarPedidos(string nombreCadete, Pedidos pedido){
     foreach (Cadete cadetePedido in cadetes)
     {
