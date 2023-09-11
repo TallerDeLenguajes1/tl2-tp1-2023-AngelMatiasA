@@ -8,6 +8,10 @@ public class Cliente
     private string ? telefono;
     private string DatosRefCliente;
 
+    public Cliente()
+    {
+        
+    }
     public Cliente(string nom,string dire,string telefono,string datref)
 
     {
@@ -17,14 +21,21 @@ public class Cliente
         this.DatosRefCliente = datref;
     }
 
-    public string Nombre { get => nombre;  }
-    public string Telefono { get => telefono;  }
+    public string Nombre { get => nombre; set => nombre = value; }
+    public string getNombre(){
+        return this.nombre;
+    }
+    public string Telefono { get => telefono; set => telefono = value;  }
     // public string Direccion { get => direccion;  }
     public string Direccion (){
         return this.direccion;
     }
     
     public string DatosRefCliente1 { get => DatosRefCliente; set => DatosRefCliente = value; }
+       public override string ToString()
+    {
+        return $"Nombre Cliente: {nombre}, \n Dirección: {direccion}, \n Teléfono: {telefono}, \n Datos de Referencia: {DatosRefCliente}";
+    }
 
     // internal string Direccion()
     // {

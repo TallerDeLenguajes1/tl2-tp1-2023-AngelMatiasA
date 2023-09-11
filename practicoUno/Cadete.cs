@@ -50,11 +50,11 @@ public class Cadete
     //     return nuevoPedido;
 
     // }
-    public void agregarPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 
-        nuevoPedido = new Pedidos(observacion, nomcli, clidire, cliTelefono, cliDatRef );
-        this.listaPedidos.Add(nuevoPedido);
+    // public void agregarPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 
+    //     nuevoPedido = new Pedidos(observacion, nomcli, clidire, cliTelefono, cliDatRef );
+    //     this.listaPedidos.Add(nuevoPedido);
 
-    }
+    // }
     public Pedidos altaPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 
         nuevoPedido = new Pedidos(observacion, nomcli, clidire, cliTelefono, cliDatRef );
         // this.listaPedidos.Add(nuevoPedido);
@@ -62,40 +62,50 @@ public class Cadete
 
     }
      public void asignarPedido ( Pedidos pedidoAsignar){ 
-        this.listaPedidos.Add(nuevoPedido);
+        pedidoAsignar.Estado = pedidoAsignar.getarreglosEstados(1);
+        pedidoAsignar.setIdCadetePedidos(this.Id);
+        this.listaPedidos.Add(pedidoAsignar); 
+
 
     }
-    public Pedidos RemoverPedido(int idPedido){ 
-        foreach (Pedidos item in listaPedidos)
+    //este metodo invocarlo en cadeteria dentro d la funcion 
+    // reasignarPedido.. lo busco al pedido y me fijo el id de
+    //cadete (tipo foreign key) que tiene el pedido
+    //y hago un foreach para buscar esecadete y ahi le 
+    //remuevo de su lista y lo reasigno a otro con asignar pedido
+    public void RemoverPedido(int idPedido){ 
+        Pedidos pedidoAux = null;
+        foreach (Pedidos item in this.listaPedidos)
         {
             if (item.NroPedido == idPedido)
             { 
-                nuevoPedido = item;
-                listaPedidos.Remove(item);
-                 return nuevoPedido;
+                pedidoAux = item;
+                
             }
-        }
-        return null;
-    }
-    public Pedidos RemoverPedido(string nomcli){ 
-        foreach (Pedidos item in listaPedidos)
-        {
-            if (item.NombreClien() == nomcli)
-            { 
-                nuevoPedido = item;
-                listaPedidos.Remove(item);
-                  break;
-            }
-        }
-        return nuevoPedido;
-    }
 
+        }
+        if (pedidoAux!= null)
+        {
+            this.listaPedidos.Remove(pedidoAux);
+            Console.WriteLine($" pedido removido con exito del cadete nro " + 
+            $"{this.id}, ${this.nombre}");
+            
+        }
+        else
+        {
+            Console.WriteLine("no se encontro el pedido");
+        }
+        
+    }
+   
 
      public void reasignarPedido ( Pedidos cambioPedido){ 
         
         this.listaPedidos.Add(cambioPedido);
 
     }
+
+    //falta mostrar la lista de los pedidos d cada cadete
 
    
 }

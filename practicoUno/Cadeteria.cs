@@ -1,52 +1,90 @@
-using System; 
+using System;
 using EspacioCadete;
 using EspacioPedidos;
-namespace EspacioCadeteria; 
+namespace EspacioCadeteria;
 
 public class Cadeteria
 {
-    private List<Cadete>? cadetes ; 
+    private List<Cadete>? cadetes;
     private List<Pedidos>? lisPedCadeteria;
-    private Cadete? nuevoCadete ; 
-        private Cadete? objCadete = new Cadete(); 
+    private Cadete? nuevoCadete;
+    private Cadete? objCadete = new Cadete();
 
     private string nombreCadeteria = "";
-    private string telefonoCadeteria ="";
+    private string telefonoCadeteria = "";
 
 
- public  Cadeteria(List<Cadete> LisCadetes){
-    this.cadetes = LisCadetes; 
-    lisPedCadeteria = new List<Pedidos>(); 
-    
+    public Cadeteria(List<Cadete> LisCadetes)
+    {
+        this.cadetes = LisCadetes;
+        lisPedCadeteria = new List<Pedidos>();
 
-   }
-    public  Cadeteria(List<Cadete> LisCadetes, string nombre, string telefono){
-    this.cadetes = LisCadetes; 
-    this.nombreCadeteria = nombre; 
-    this.telefonoCadeteria = telefono; 
-    lisPedCadeteria = new List<Pedidos>(); 
 
-   }
-   // alta pedido llamando a la funcion del objeto cadete q a su vez llama a la funcion del obj pedido
-   public void altaPediCadeteria(int idCadete,string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){
+    }
+    public Cadeteria(List<Cadete> LisCadetes, string nombre, string telefono)
+    {
+        this.cadetes = LisCadetes;
+        this.nombreCadeteria = nombre;
+        this.telefonoCadeteria = telefono;
+        lisPedCadeteria = new List<Pedidos>();
 
-    
-         lisPedCadeteria.Add(objCadete.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef ));  
-      
-   }
+    }
+    // alta pedido llamando a la funcion del objeto cadete q a su vez llama a la funcion del obj pedido
+    public void altaPedidoCadeteria( string observacion, string nomcli, string clidire, string cliTelefono, string cliDatRef)
+    {
 
-   public void agregarCadete( string nombre, string direccion, string telefono){
-   
-    nuevoCadete = new Cadete(nombre, direccion, telefono );
+
+        lisPedCadeteria.Add(objCadete.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef));
+
+    } 
+
+//la persona tendra que ingresar en interfaz los tipos d estado 0 1 2
+    public void cambiarEStadoPedido( int idPedido, int estado){
+        foreach (Pedidos pedido in this.lisPedCadeteria)
+        {   
+            if (idPedido == pedido.NroPedido)
+            {
+                pedido.Estado = pedido.getarreglosEstados(estado);
+                
+            }
+        }
+    }
+
+    public void mostrarPedidosPorEStado( int estado){
+        estado--;//para que la opcion ingresada disminuya al valor de arrayEstados
+        bool hayPedidos = false;
+        foreach (Pedidos pedido in this.lisPedCadeteria)
+        {
+            if (String.Equals(pedido.Estado, pedido.getarreglosEstados(estado), StringComparison.OrdinalIgnoreCase))
+            {string nombre = pedido.NombreClien();
+                Console.WriteLine($" Pedido nro {pedido.NroPedido},  \n Cliente {nombre }");
+                string infoPedido =  pedido.ToString();
+                Console.WriteLine($"{infoPedido}");
+                hayPedidos = true;
+
+               
+            }
+        }
+        if(!hayPedidos){
+            Console.WriteLine($"La lista de pedidos Esta vacia");
+
+
+        }
+    }
+
+    public void agregarCadete(string nombre, string direccion, string telefono)
+    {
+
+        nuevoCadete = new Cadete(nombre, direccion, telefono);
 
         this.cadetes.Add(nuevoCadete);
-    //hacer tipom capa de datos para comunicar entre todos los objetos
-    //similar a este metodo y a agregar pedido
+        //hacer tipom capa de datos para comunicar entre todos los objetos
+        //similar a este metodo y a agregar pedido
 
-    
 
-   }
-       public string NombreCadeteria { get => nombreCadeteria; set => nombreCadeteria = value; }
+
+    }
+    public string NombreCadeteria { get => nombreCadeteria; set => nombreCadeteria = value; }
     public string TelefonoCadeteria { get => telefonoCadeteria; set => telefonoCadeteria = value; }
     //public List<Cadete>? Cadetes { get => Cadetes; set => Cadetes = value; }
     /*public void CargaInicialCadetes(List<Cadete> LisCadetes)
@@ -54,112 +92,143 @@ public class Cadeteria
         this.cadetes=LisCadetes;    
     }
 */
-    public List<Pedidos> getListaPedidos(){
+    public List<Pedidos> getListaPedidos()
+    {
         return this.lisPedCadeteria;
     }
-     public List<Cadete> getListaCadetes(){
+    public List<Cadete> getListaCadetes()
+    {
         return this.cadetes;
     }
-    public void asignarPedidos(int idPedido, int idCadete){
+    public void asignarPedidos(int idPedido, int idCadete)
+    {
         Pedidos pedidoAux;
-    foreach (Pedidos  Pedido in getListaPedidos())
-    {
-        if (idPedido == Pedido.NroPedido)
+        foreach (Pedidos Pedido in getListaPedidos())
         {
-            foreach (Cadete cadeteAsignar in this.cadetes)
+            if (idPedido == Pedido.NroPedido)
             {
-                if(idCadete == cadeteAsignar.Id)
+                foreach (Cadete cadeteAsignar in this.cadetes)
                 {
-                    cadeteAsignar.asignarPedido(Pedido);
-                    Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id"+
-                    $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
+                    if (idCadete == cadeteAsignar.Id)
+                    {
+                        cadeteAsignar.asignarPedido(Pedido);
+                        Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id" +
+                        $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
+                    }
                 }
-            }            
-        }        
+            }
+        }
+
     }
-    
-   } 
-   // le tendria que pasar el parametro List<Cadete> cadetesAMostrar
+    // le tendria que pasar el parametro List<Cadete> cadetesAMostrar
 
 
-      public void asignarPedidos(int idPedido,  string nombreCadete){
-        Pedidos pedidoAux;
-    foreach (Pedidos  Pedido in getListaPedidos())
+    public void asignarPedidos(int idPedido, string nombreCadete)
     {
-        if (idPedido == Pedido.NroPedido)
+        // Pedidos pedidoAux;
+        foreach (Pedidos Pedido in getListaPedidos())
         {
-            foreach (Cadete cadeteAsignar in this.cadetes)
+            if (idPedido == Pedido.NroPedido)
             {
-                if(String.Equals(nombreCadete, cadeteAsignar.Nombre, StringComparison.OrdinalIgnoreCase))
+                foreach (Cadete cadeteAsignar in this.cadetes)
                 {
-                    cadeteAsignar.asignarPedido(Pedido);
-                    Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id"+
-                    $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
+                    if (String.Equals(nombreCadete, cadeteAsignar.Nombre, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cadeteAsignar.asignarPedido(Pedido);
+                        Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id" +
+                        $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
+                    }
                 }
-            }            
-        }        
+            }
+        }
+
     }
-    
-   } 
-   public  void  mostrarCadetes ( ){
-    foreach (Cadete Cadete in this.cadetes)
+    public void mostrarCadetes()
     {
-        Console.WriteLine($"Cadete nro {Cadete.Id}");
-        Console.Write($"Nombre  {Cadete.Nombre}. ");
-        Console.Write($"Direccion {Cadete.Direccion}. ");
-        Console.Write($"Telefono: {Cadete.Telefono}. ");
-        Console.WriteLine("****************************************************");
-        
+        foreach (Cadete Cadete in this.cadetes)
+        {
+            Console.WriteLine("********************************************* \n");
+            Console.WriteLine($"Cadete nro {Cadete.Id}");
+            Console.WriteLine($"Nombre  {Cadete.Nombre}. ");
+            Console.WriteLine($"Direccion {Cadete.Direccion}. ");
+            Console.WriteLine($"Telefono: {Cadete.Telefono}. ");
+
+        }
+
+    } 
+     public void mostrarPedidosCadeteria()
+    {
+        foreach (Pedidos pedido in this.lisPedCadeteria)
+         {  
+            //pedido.ToString();
+             Console.WriteLine($"pedido nro {pedido.NroPedido}");
+            //Console.Write($"Nombre del cliente: {pedido.NombreClien}. ");
+            pedido.NombreClien();
+             Console.Write("NombreCliente " + pedido.NombreClien());
+             Console.WriteLine($"Direccion {pedido.Observacion}. ");
+           
+            Console.WriteLine($"Estado  {pedido.Estado}. ");
+            if(pedido.getIdCadetePedidos() != 0){
+                foreach (Cadete portadorPedido in this.cadetes)
+                {
+                    if (portadorPedido.Id == pedido.getIdCadetePedidos())
+                    {
+                        Console.WriteLine($"Pedido enviado con {portadorPedido.Nombre}. ");
+                    }
+                    
+                }
+
+            }
+            
+            // Console.Write($"Telefono: {pedido.VerDatosCliente}. ");
+            pedido.VerDatosCliente();
+           
+
+            Console.WriteLine("****************************** \n ***************************");
+
+        }
+
     }
 
-   }
-    public void reasignarPedidos(int idPedido, string NombreCadeteAsignar){
-        Pedidos ? pedidos;
-        foreach (Cadete cadeteCancelado in cadetes)
+    public void reasignarPedidos(int idPedido, string NombreCadeteAsignar)
+    {
+        Pedidos? pedidos;
+        int idCadeteRemover = 0;
+        foreach (Pedidos pedido in this.lisPedCadeteria)
         {
-            //primera version
-            pedidos =cadeteCancelado.RemoverPedido(idPedido);
-            if (pedidos != null)
+            if (idPedido == pedido.NroPedido)
             {
-                foreach (Cadete cadete in this.cadetes)
-            {
-                if (cadete.Nombre == NombreCadeteAsignar)
+                idCadeteRemover = pedido.getIdCadetePedidos();
+                foreach (Cadete cadeteRequerido in this.cadetes)
                 {
-                    cadete.asignarPedido(pedidos); 
+                    if (String.Equals(NombreCadeteAsignar, cadeteRequerido.Nombre, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cadeteRequerido.asignarPedido(pedido);
+
+
+                    }
                 }
+
+            }
+
+        }
+        removerPedido(idCadeteRemover, idPedido);
+    }
+
+    //nose si es que puede o no ser estatico (no puede si uso this.cadetes)
+    public  void removerPedido( int idKdTCancelado, int idPedRemovido){
+        foreach (Cadete cadete in this.cadetes)
+        {
+            if (idKdTCancelado == cadete.Id)
+            {
+                Console.WriteLine("se remueve el pedido "); 
+                cadete.RemoverPedido(idPedRemovido);
                 
             }
-             
-            }
-            
-            //hacer un for each con la lista de cadetes para bscar el cadete a asignar. 
-            //y asignarle el pedido devuelto de la funcion anterior
-            //otraversion
-        //    foreach (Pedidos pedido in item.ListaPedidos)
-        //    {
-        //         if (pedido.NroPedido == idPedido)
-        //         {
-        //             // item.ListaPedidos.
-        //             break;
-                    
-        //         }
-            
-        //    }
             
         }
-        //  if (pedidos !=null)
-        // {
-            
-        // }
-       
-        // asignarPedidos(NombreCadeteAsignar, pedidos );
-
-    
-   }
-   
 
 
+    }
 
-    
-    
 }

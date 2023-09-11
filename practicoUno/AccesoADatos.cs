@@ -63,7 +63,7 @@ public class AccesoADatos
                 var linea = lector.ReadLine(); 
                 var values = linea.Split(';');
                 nuevoCadete.Nombre = values[0];
-                Console.WriteLine($"nombre desd el csv" + values[0]);
+                // Console.WriteLine($"nombre desd el csv" + values[0]);
  
 
                 nuevoCadete.Direccion = values[1]; 
@@ -81,6 +81,7 @@ public class AccesoADatos
         return CadetesCsv;
     }
 
+    
 
     // se podria pasar x referencia? como? 
     // ahi podria hacer una condicion q devuelva true or false
