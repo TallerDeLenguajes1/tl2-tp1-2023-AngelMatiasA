@@ -55,9 +55,10 @@ public class Cadete
         this.listaPedidos.Add(nuevoPedido);
 
     }
-    public void altaPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 
+    public Pedidos altaPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 
         nuevoPedido = new Pedidos(observacion, nomcli, clidire, cliTelefono, cliDatRef );
         // this.listaPedidos.Add(nuevoPedido);
+        return nuevoPedido;
 
     }
      public void asignarPedido ( Pedidos pedidoAsignar){ 

@@ -1,6 +1,7 @@
 using  System; 
 using System.Collections; 
-using System.IO; 
+using System.IO;
+using System.Runtime.CompilerServices;
 using EspacioCadete; 
 using EspacioCadeteria;
 
@@ -52,7 +53,10 @@ public class AccesoADatos
            // Cadete nuevoCadete = new Cadete();
             
              string pirmeraLinea = lector.ReadLine();
+            //  .Skip(1).
+            //  string lineas = File.ReadAllLines(nombreArchivo,)Skip(1);
              Console.WriteLine("primera linea y segunda" + pirmeraLinea);
+             
              while (!lector.EndOfStream  )
              { 
                 Cadete nuevoCadete = new Cadete();

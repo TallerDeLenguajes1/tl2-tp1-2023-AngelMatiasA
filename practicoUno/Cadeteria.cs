@@ -6,27 +6,33 @@ namespace EspacioCadeteria;
 public class Cadeteria
 {
     private List<Cadete>? cadetes ; 
-    private Pedidos? nuevoPedido;
-    private Cadete? nuevoCadete; 
+    private List<Pedidos>? lisPedCadeteria;
+    private Cadete? nuevoCadete ; 
+        private Cadete? objCadete = new Cadete(); 
+
     private string nombreCadeteria = "";
     private string telefonoCadeteria ="";
 
 
-    public  Cadeteria(List<Cadete> LisCadetes){
+ public  Cadeteria(List<Cadete> LisCadetes){
     this.cadetes = LisCadetes; 
+    lisPedCadeteria = new List<Pedidos>(); 
+    
+
+   }
+    public  Cadeteria(List<Cadete> LisCadetes, string nombre, string telefono){
+    this.cadetes = LisCadetes; 
+    this.nombreCadeteria = nombre; 
+    this.telefonoCadeteria = telefono; 
+    lisPedCadeteria = new List<Pedidos>(); 
 
    }
    // alta pedido llamando a la funcion del objeto cadete q a su vez llama a la funcion del obj pedido
    public void altaPediCadeteria(int idCadete,string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){
 
-    foreach(var cad in cadetes){
-
-        if (cad.Id==idCadete){
-           cad.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef );
-        }
-    }
-   
-
+    
+         lisPedCadeteria.Add(objCadete.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef ));  
+      
    }
 
    public void agregarCadete( string nombre, string direccion, string telefono){
@@ -48,21 +54,53 @@ public class Cadeteria
         this.cadetes=LisCadetes;    
     }
 */
-    
-    public void asignarPedidos(string nombreCadete, Pedidos pedido){
-    foreach (Cadete cadetePedido in cadetes)
+    public List<Pedidos> getListaPedidos(){
+        return this.lisPedCadeteria;
+    }
+     public List<Cadete> getListaCadetes(){
+        return this.cadetes;
+    }
+    public void asignarPedidos(int idPedido, int idCadete){
+        Pedidos pedidoAux;
+    foreach (Pedidos  Pedido in getListaPedidos())
     {
-        if (nombreCadete == cadetePedido.Nombre)
+        if (idPedido == Pedido.NroPedido)
         {
-            cadetePedido.asignarPedido(pedido);
-            break;
-            
-        }
-        
+            foreach (Cadete cadeteAsignar in this.cadetes)
+            {
+                if(idCadete == cadeteAsignar.Id)
+                {
+                    cadeteAsignar.asignarPedido(Pedido);
+                    Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id"+
+                    $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
+                }
+            }            
+        }        
     }
     
-   }
+   } 
    // le tendria que pasar el parametro List<Cadete> cadetesAMostrar
+
+
+      public void asignarPedidos(int idPedido,  string nombreCadete){
+        Pedidos pedidoAux;
+    foreach (Pedidos  Pedido in getListaPedidos())
+    {
+        if (idPedido == Pedido.NroPedido)
+        {
+            foreach (Cadete cadeteAsignar in this.cadetes)
+            {
+                if(String.Equals(nombreCadete, cadeteAsignar.Nombre, StringComparison.OrdinalIgnoreCase))
+                {
+                    cadeteAsignar.asignarPedido(Pedido);
+                    Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id"+
+                    $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
+                }
+            }            
+        }        
+    }
+    
+   } 
    public  void  mostrarCadetes ( ){
     foreach (Cadete Cadete in this.cadetes)
     {
