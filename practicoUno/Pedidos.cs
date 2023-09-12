@@ -45,26 +45,41 @@ public class Pedidos
         string nombre =this.clienteNuevo.getNombre();
        return nombre;
     }
+    public void SetNombreClien(string nombre){
+        this.clienteNuevo.Nombre = nombre;
+       
+    }
+public void SetClienDirecc(string direc){
+        this.clienteNuevo.setDireccion(direc);
+       
+    }
+    public void SetClienTelefono(string tel){
+        this.clienteNuevo.Telefono = tel;
+       
+    }
+    public void SetClienDatosRef(string refclien){
+        this.clienteNuevo.DatosRefCliente1 = refclien;
+       
+    }
 
-    public  void VerDireccionCliente (){ 
-        Console.WriteLine(" la direccion del cliente es  " + clienteNuevo.Direccion());
-
+    public  void VerDireccionCliente()
+    { 
+        Console.WriteLine("Dirección " + clienteNuevo.Direccion());
     }
     public void VerDatosCliente ()
     { 
-        Console.WriteLine(" los datos ref del cliente son:  " + clienteNuevo.DatosRefCliente1); 
-        Console.WriteLine(" el telefono del cliente es:  " + clienteNuevo.Telefono); 
+        Console.WriteLine("Datos de referencia:  " + clienteNuevo.DatosRefCliente1); 
+        Console.WriteLine("Telefono:  " + clienteNuevo.Telefono); 
 
     }
     public override string ToString()
 
 {
     string infoCliente = clienteNuevo.ToString();
-    return $"Pedido: {nroPedido}\n" +
+    return $"       Pedido nro: {nroPedido}\n" +
+     $"Estado: {estado}\n" +
+           $"{infoCliente}\n" +
            $"Observación: {observacion}\n" +
-           $"Estado: {estado}\n" +
-           $"Cliente: {infoCliente}\n" +
-          
            $"Id Cadete al que pertenece: {idCadete}"; 
           
 }

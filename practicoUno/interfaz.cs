@@ -67,7 +67,13 @@ public class interfaz
             break;
         case 3:
             // Llamada al método para cambiar el estado de los pedidos
-            // cadeteria.cambiarEstadoPedidos();
+             Console.WriteLine("ingrese el nro  de pedido ");
+               int idpedido =  Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("ingrese 1 para \"sin asignar\",  "+
+            "2 para \"en proceso\" o 3 para \"Realizado\"");
+
+               int estado = Convert.ToInt32(Console.ReadLine());
+             cadeteria.cambiarEStadoPedido(idpedido, estado);
             // CambiarEstadoPedidos();
             break;
         case 4:
@@ -104,6 +110,7 @@ public class interfaz
     public void cargarDatos(){
         datos = new AccesoADatos();
         cadeteria = new Cadeteria(datos.leerCadetes("Cadete.csv"));
+        cadeteria.asignarPedidosTesting(datos.CargarPedidos("Pedidos.csv"));
 
 
 

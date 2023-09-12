@@ -30,15 +30,15 @@ public class Cliente
     public string Direccion (){
         return this.direccion;
     }
+     public void setDireccion (string direcc){
+        this.direccion = direcc;
+    }
     
     public string DatosRefCliente1 { get => DatosRefCliente; set => DatosRefCliente = value; }
        public override string ToString()
     {
-        return $"Nombre Cliente: {nombre}, \n Dirección: {direccion}, \n Teléfono: {telefono}, \n Datos de Referencia: {DatosRefCliente}";
+        return $"Dirección: {direccion}, \nNombre Cliente: {nombre},  \nTeléfono: {telefono}, \n Datos de Referencia: {DatosRefCliente}";
     }
 
-    // internal string Direccion()
-    // {
-    //     throw new NotImplementedException();
-    // }
+   
 }

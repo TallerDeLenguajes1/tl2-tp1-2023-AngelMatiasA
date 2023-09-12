@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using EspacioCadete; 
 using EspacioCadeteria;
+using EspacioPedidos;
 
 namespace EspacioDatos; 
 
@@ -62,6 +63,7 @@ public class AccesoADatos
                 Cadete nuevoCadete = new Cadete();
                 var linea = lector.ReadLine(); 
                 var values = linea.Split(';');
+
                 nuevoCadete.Nombre = values[0];
                 // Console.WriteLine($"nombre desd el csv" + values[0]);
  
@@ -81,7 +83,31 @@ public class AccesoADatos
         return CadetesCsv;
     }
 
-    
+//metodo para agilizar el testing
+      public List<Pedidos> CargarPedidos(string nombreArchivo){
+        List<Pedidos> PedidosCsv = new List<Pedidos>();  
+        StreamReader lector =  existeCsv(nombreArchivo); 
+        if (lector!= null)
+        {   
+             string pirmeraLinea = lector.ReadLine();
+             while (!lector.EndOfStream  )
+             { 
+                 Pedidos nuevoPedido = new Pedidos();
+                var linea = lector.ReadLine(); 
+                var values = linea.Split(';');
+                
+                Console.WriteLine($"largo de la linea es de {values.Length}" );
+
+                nuevoPedido.Observacion =values[0];
+                nuevoPedido.SetNombreClien(values[1]);
+                nuevoPedido.SetClienDirecc(values[2]);
+                nuevoPedido.SetClienTelefono(values[3]);
+                nuevoPedido.SetClienDatosRef(values[4]);
+                PedidosCsv.Add(nuevoPedido);
+             }
+        }
+        return PedidosCsv;
+    }
 
     // se podria pasar x referencia? como? 
     // ahi podria hacer una condicion q devuelva true or false

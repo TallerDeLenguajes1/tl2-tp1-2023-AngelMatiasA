@@ -17,8 +17,13 @@ public class Cadeteria
     public Cadeteria(List<Cadete> LisCadetes)
     {
         this.cadetes = LisCadetes;
+        //lo comento xq uso el asginar pedidos testing para arrancar la lista
         lisPedCadeteria = new List<Pedidos>();
 
+
+    }
+    public void asignarPedidosTesting (List<Pedidos> pedidos){
+        this.lisPedCadeteria = pedidos;
 
     }
     public Cadeteria(List<Cadete> LisCadetes, string nombre, string telefono)
@@ -40,12 +45,18 @@ public class Cadeteria
 
 //la persona tendra que ingresar en interfaz los tipos d estado 0 1 2
     public void cambiarEStadoPedido( int idPedido, int estado){
+        string estadoAnterior ="";
+        estado--;
         foreach (Pedidos pedido in this.lisPedCadeteria)
         {   
             if (idPedido == pedido.NroPedido)
             {
+                estadoAnterior = pedido.Estado;
                 pedido.Estado = pedido.getarreglosEstados(estado);
-                
+                //Console.WriteLine($"pedido nro {idPedido} para el cliente: "+ pedido.NombreClien()+
+                //"\n Destino: " + pedido.VerDireccionCliente + $" \n Estado anterior {estadoAnterior}");
+                  Console.WriteLine($" \n Estado anterior {estadoAnterior}");
+                Console.WriteLine(pedido.ToString());
             }
         }
     }
@@ -56,15 +67,19 @@ public class Cadeteria
         foreach (Pedidos pedido in this.lisPedCadeteria)
         {
             if (String.Equals(pedido.Estado, pedido.getarreglosEstados(estado), StringComparison.OrdinalIgnoreCase))
-            {string nombre = pedido.NombreClien();
-                Console.WriteLine($" Pedido nro {pedido.NroPedido},  \n Cliente {nombre }");
+            {//string nombre = pedido.NombreClien();
+                // Console.WriteLine($" Pedido nro {pedido.NroPedido},  \n Cliente {nombre }");
                 string infoPedido =  pedido.ToString();
+                Console.WriteLine("********************************************* \n");
+
                 Console.WriteLine($"{infoPedido}");
                 hayPedidos = true;
 
                
             }
         }
+        Console.WriteLine("********************************************* \n");
+
         if(!hayPedidos){
             Console.WriteLine($"La lista de pedidos Esta vacia");
 
@@ -135,8 +150,8 @@ public class Cadeteria
                     if (String.Equals(nombreCadete, cadeteAsignar.Nombre, StringComparison.OrdinalIgnoreCase))
                     {
                         cadeteAsignar.asignarPedido(Pedido);
-                        Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id" +
-                        $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
+                        Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete de id: " +
+                        $"{cadeteAsignar.Id}, {cadeteAsignar.Nombre}");
                     }
                 }
             }
@@ -148,12 +163,14 @@ public class Cadeteria
         foreach (Cadete Cadete in this.cadetes)
         {
             Console.WriteLine("********************************************* \n");
-            Console.WriteLine($"Cadete nro {Cadete.Id}");
-            Console.WriteLine($"Nombre  {Cadete.Nombre}. ");
-            Console.WriteLine($"Direccion {Cadete.Direccion}. ");
+            Console.WriteLine($"        Cadete nro {Cadete.Id}");
+            Console.WriteLine($"Nombre: {Cadete.Nombre}. ");
+            Console.WriteLine($"Direccion: {Cadete.Direccion}. ");
             Console.WriteLine($"Telefono: {Cadete.Telefono}. ");
 
         }
+        Console.WriteLine("********************************************* \n");
+
 
     } 
      public void mostrarPedidosCadeteria()
@@ -161,14 +178,12 @@ public class Cadeteria
         foreach (Pedidos pedido in this.lisPedCadeteria)
          {  
             //pedido.ToString();
-             Console.WriteLine($"pedido nro {pedido.NroPedido}");
+            Console.WriteLine(" \n *************************** \n");
+
+             Console.WriteLine($"       pedido nro {pedido.NroPedido}");
             //Console.Write($"Nombre del cliente: {pedido.NombreClien}. ");
-            pedido.NombreClien();
-             Console.Write("NombreCliente " + pedido.NombreClien());
-             Console.WriteLine($"Direccion {pedido.Observacion}. ");
-           
-            Console.WriteLine($"Estado  {pedido.Estado}. ");
-            if(pedido.getIdCadetePedidos() != 0){
+            Console.WriteLine($"Estado: {pedido.Estado}. ");
+             if(pedido.getIdCadetePedidos() != 0){
                 foreach (Cadete portadorPedido in this.cadetes)
                 {
                     if (portadorPedido.Id == pedido.getIdCadetePedidos())
@@ -179,17 +194,26 @@ public class Cadeteria
                 }
 
             }
+             pedido.VerDireccionCliente();
+             Console.WriteLine("Nombre Cliente: " + pedido.NombreClien());
+            Console.WriteLine($"Observacion: {pedido.Observacion}. ");
+            
+           
             
             // Console.Write($"Telefono: {pedido.VerDatosCliente}. ");
             pedido.VerDatosCliente();
            
 
-            Console.WriteLine("****************************** \n ***************************");
 
         }
+        Console.WriteLine("*************************** \n");
+
 
     }
 
+//hacerlo q busqe x id tmb.. hya una pequeña incongruencia cuando el usuario
+//no ingresa el nombre o no coincide.. igual se le remueve de la lista del otro
+//usuario.. estaria bueno una tipo promesa...
     public void reasignarPedidos(int idPedido, string NombreCadeteAsignar)
     {
         Pedidos? pedidos;
