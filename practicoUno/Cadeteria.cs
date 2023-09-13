@@ -156,7 +156,6 @@ public class Cadeteria
                 }
             }
         }
-
     }
     public void mostrarCadetes()
     {
@@ -167,12 +166,51 @@ public class Cadeteria
             Console.WriteLine($"Nombre: {Cadete.Nombre}. ");
             Console.WriteLine($"Direccion: {Cadete.Direccion}. ");
             Console.WriteLine($"Telefono: {Cadete.Telefono}. ");
-
         }
         Console.WriteLine("********************************************* \n");
-
-
     } 
+
+    //Mostrar un informe de pedidos al finalizar la jornada que incluya el monto ganado
+    //y la cantidad de envíos de cada cadete y el total. Muestre también la cantidad de
+    //envíos promedio por cadete.
+
+    public double montoGanado(){
+        double total = 0; 
+        foreach (Cadete cadete in this.cadetes)
+        {
+            foreach (Pedidos pedido in cadete.ListaPedidos)
+            {
+                if(pedido.Estado == pedido.getarreglosEstados(2)){
+                    total +=500;
+                }
+            }
+            
+            
+        }
+
+        return total;
+    }
+    //la cantidad de envíos de cada cadete y el total.
+    public string[] cantEnviosXCadete(Cadete cadete){
+        int cantxCadete = 0; 
+        //nqv falta ver bien
+        string [] informeIndividual = {"nombre", "catidad"};
+      
+        
+       
+            foreach (Pedidos pedido in cadete.ListaPedidos)
+            {
+                if(pedido.Estado == pedido.getarreglosEstados(2)){
+                   
+                }
+            }
+            
+            
+       
+
+        return informeIndividual;
+    }
+
      public void mostrarPedidosCadeteria()
     {
         foreach (Pedidos pedido in this.lisPedCadeteria)
