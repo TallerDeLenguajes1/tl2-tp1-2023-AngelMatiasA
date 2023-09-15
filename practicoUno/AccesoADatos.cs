@@ -96,7 +96,7 @@ public class AccesoADatos
                 var linea = lector.ReadLine(); 
                 var values = linea.Split(';');
                 
-                Console.WriteLine($"largo de la linea es de {values.Length}" );
+                // Console.WriteLine($"largo de la linea es de {values.Length}" );
 
                 nuevoPedido.Observacion =values[0];
                 nuevoPedido.SetNombreClien(values[1]);

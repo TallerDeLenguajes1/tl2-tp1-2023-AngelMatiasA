@@ -174,9 +174,9 @@ public class Cadeteria
     //y la cantidad de envíos de cada cadete y el total. Muestre también la cantidad de
     //envíos promedio por cadete.
 
-    public double montoGanado(){
+    public double montoGanado(List<Cadete> cadetes){
         double total = 0; 
-        foreach (Cadete cadete in this.cadetes)
+        foreach (Cadete cadete in cadetes)
         {
             foreach (Pedidos pedido in cadete.ListaPedidos)
             {
