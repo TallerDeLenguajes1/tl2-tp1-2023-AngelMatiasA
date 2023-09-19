@@ -1,7 +1,9 @@
 using EspacioCadeteria; 
 using EspacioCadete;
 using EspacioDatos;
+using EspacioInforme;
 namespace EspacioInterfaz; 
+
 
 
 public class interfaz
@@ -9,8 +11,9 @@ public class interfaz
     bool finalizar = false;
     int opcion1 = 0;
     Cadeteria cadeteria;
+    Informe informeNuev;
     AccesoADatos datos = new AccesoADatos();
-    
+
 
 
 
@@ -38,6 +41,8 @@ public class interfaz
     {
         case 0: 
             finalizar = true; 
+             informeNuev = new Informe(cadeteria);
+             informeNuev.mostrarInforme();
             break;
 
         case 1:
@@ -112,6 +117,7 @@ public class interfaz
         datos = new AccesoADatos();
         cadeteria = new Cadeteria(datos.leerCadetes("Cadete.csv"));
         cadeteria.asignarPedidosTesting(datos.CargarPedidos("Pedidos.csv"));
+       
 
 
 

@@ -8,7 +8,7 @@ namespace EspacioCadete;
 public class Cadete
 {
     static int cant = 0; 
-    int id; 
+    int id = 0; 
     string direccion; 
     private string nombre;
     string telefono;  
@@ -23,26 +23,19 @@ public class Cadete
     public string Nombre { get => nombre; set => nombre = value; }
 
     public Cadete (){
-        this.id = cant ++; 
+        this.id = cant; 
         listaPedidos = new List<Pedidos>();
+        cant++;
     }
      public Cadete (string nombre, string direccion, string telefono){
-        this.id = cant ++;
+        this.id = cant;
         this.nombre = nombre; 
         this.direccion = direccion ; 
         this.telefono = telefono;
         listaPedidos = new List<Pedidos>();
+        cant++;
     }
-    public double jornalACobrar(){
-        double sueldo = 0; 
-        foreach (Pedidos pedido in listaPedidos)
-        { 
-            sueldo +=500;
-            
-        }
-
-        return sueldo;
-    }
+  
 
     //esta no se usaria porque hay q agregar pedido dependientemente del cadete
     // public Pedidos altaPedido ( string observacion,  string nomcli, string clidire, string cliTelefono, string cliDatRef){ 

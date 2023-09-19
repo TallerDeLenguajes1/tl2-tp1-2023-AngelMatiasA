@@ -9,9 +9,10 @@ namespace EspacioInforme;
 
 public class Informe
 { 
-    /*Mostrar  el monto ganado  y la cantidad de envíos de cada cadete y el total. 
+    /*Mostrar  el monto ganado  y la cantidad de envíos de cada cadete y el totalEnvixCad. 
     Muestre también la cantidad de envíos promedio por cadete. */
-   int enviPromedXCadete; 
+   private int enviPromedXCadete; 
+   private int totalEnvios;
    Cadeteria cadeteria; 
    List<LisInforme> nuevaLisInf; 
 
@@ -33,42 +34,72 @@ public Informe (){
 
     private  void CargarInforme (Cadeteria nuevacadeteria){
           this.cadeteria = nuevacadeteria;
-          int total= 0;
+          int totalEnvixCad= 0; 
+          LisInforme lisinforme;
+          int cantidadDeCadetes = cadeteria.getListaCadetes().Count;
+
         nuevaLisInf = new List<LisInforme>();
         foreach (Cadete cadete in this.cadeteria.getListaCadetes())
-        {
+        {totalEnvixCad = 0; 
+        lisinforme = new LisInforme();
                             
             Console.WriteLine($"el pedido es para {cadete.Direccion} cadete nro {cadete.Nombre}");
 
             foreach (Pedidos pedido in cadete.ListaPedidos)
             {
-                // if(pedido.Estado == pedido.getarreglosEstados(2)){
-                //     total +=500;
-                // }
-            }
+                if(pedido.Estado == pedido.getarreglosEstados(2)){
+                    totalEnvixCad ++;
+                }
+            } 
+            lisinforme.setCantxCade(totalEnvixCad);
+            lisinforme.setMontoGanadoCade(totalEnvixCad *500);
+            lisinforme.setNomCade(cadete.Nombre); 
+            lisinforme.setIdCade(cadete.Id); 
+            nuevaLisInf.Add(lisinforme); 
+            totalEnvios +=  totalEnvixCad;
+            enviPromedXCadete = totalEnvios / cantidadDeCadetes;
+
             
             
+        } 
+
+
+    } 
+    public void mostrarInforme (){
+        Console.WriteLine("Informe \n \n "); 
+        Console.WriteLine($"El total de envios es de {totalEnvios}");
+        
+        Console.WriteLine($"El promedio de envios por cadetes  es de {this.enviPromedXCadete}");
+        
+        foreach (var inform in this.nuevaLisInf)
+        {
+            Console.WriteLine("Cadete nro " + inform.getIdCade());
+            Console.WriteLine("Nombre : "+ inform.getNomCade());
+            Console.WriteLine("Cantidad de envios"+ inform.getCantxCade());
+            Console.WriteLine("Monto ganado "+ inform.getMontoGanadoCade());
         }
 
     }
         public double montosGanado(List<Cadete> cadetes){
-        double total = 0; 
+        double totalEnvixCad = 0; 
         foreach (Cadete cadete in cadetes)
         {
             foreach (Pedidos pedido in cadete.ListaPedidos)
             {
                 if(pedido.Estado == pedido.getarreglosEstados(2)){
-                    total +=500;
+                    totalEnvixCad +=500;
                 }
             }
             
             
         }
 
-        return total;
+        return totalEnvixCad;
     }
     
-}
+}//fin de la clase Informe
+
+//comienza la clase ejecinforme
 public class EjecInforme{
     
 
