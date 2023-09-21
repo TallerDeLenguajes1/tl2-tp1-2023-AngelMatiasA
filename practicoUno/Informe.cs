@@ -1,6 +1,7 @@
 using EspacioCadeteria; 
 using EspacioCadete;
 using EspacioPedidos;
+using System.Linq;
 using System.Collections; 
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
@@ -11,7 +12,7 @@ public class Informe
 { 
     /*Mostrar  el monto ganado  y la cantidad de envíos de cada cadete y el totalEnvixCad. 
     Muestre también la cantidad de envíos promedio por cadete. */
-   private int enviPromedXCadete; 
+   private double enviPromedXCadete; 
    private int totalEnvios;
    Cadeteria cadeteria; 
    List<LisInforme> nuevaLisInf; 
@@ -31,6 +32,29 @@ public Informe (){
     // {
     //     throw new NotImplementedException();
     // }
+
+  /*  private void CargarInforme(Cadeteria nuevacadeteria)
+{
+    this.cadeteria = nuevacadeteria;
+    int totalEnvios = 0;
+    int cantidadDeCadetes = cadeteria.getListaCadetes().Count;
+
+    nuevaLisInf = this.cadeteria.getListaCadetes().Select(cadete =>
+    {
+        int totalEnvixCad = cadete.ListaPedidos.Count(pedido => pedido.Estado == pedido.getarreglosEstados(2));
+        totalEnvios += totalEnvixCad;
+
+        return new LisInforme
+        {
+            CantxCade = totalEnvixCad,
+            MontoGanadoCade = totalEnvixCad * 500,
+            NomCade = cadete.Nombre,
+            IdCade = cadete.Id
+        };
+    }).ToList();
+
+    double enviPromedXCadete = (double)totalEnvios / cantidadDeCadetes;
+}*/
 
     private  void CargarInforme (Cadeteria nuevacadeteria){
           this.cadeteria = nuevacadeteria;
@@ -57,12 +81,8 @@ public Informe (){
             lisinforme.setIdCade(cadete.Id); 
             nuevaLisInf.Add(lisinforme); 
             totalEnvios +=  totalEnvixCad;
-            enviPromedXCadete = totalEnvios / cantidadDeCadetes;
-
-            
-            
         } 
-
+        this.enviPromedXCadete = Convert.ToDouble(totalEnvios) / Convert.ToDouble(cantidadDeCadetes);
 
     } 
     public void mostrarInforme (){
@@ -124,9 +144,14 @@ public class LisInforme
    private double montoGanado= 0.0; 
    private int cantPorCadete = 0; 
    private string nombreCadete = "" ; 
-   private int idCadete= 0; 
+   private int idCadete= 0;
 
-   public LisInforme(){
+    public int CantxCade { get; internal set; }
+    public int MontoGanadoCade { get; internal set; }
+    public string NomCade { get; internal set; }
+    public int IdCade { get; internal set; }
+
+    public LisInforme(){
 
    }
     public LisInforme(int id, string nombre, int cant, double ganancias){ 

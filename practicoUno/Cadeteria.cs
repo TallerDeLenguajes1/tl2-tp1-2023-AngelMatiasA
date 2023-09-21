@@ -61,6 +61,31 @@ public class Cadeteria
         }
     }
 
+public void mostrarPedidosPorEStado(int estado)
+{
+    estado--; //para que la opcion ingresada disminuya al valor de arrayEstados
+
+    var pedidosFiltrados = this.lisPedCadeteria
+        .Where(pedido => String.Equals(pedido.Estado, pedido.getarreglosEstados(estado), StringComparison.OrdinalIgnoreCase))
+        .ToList();
+
+    if (pedidosFiltrados.Any())
+    {
+        foreach (var pedido in pedidosFiltrados)
+        {
+            string infoPedido = pedido.ToString();
+            Console.WriteLine("********************************************* \n");
+            Console.WriteLine($"{infoPedido}");
+        }
+        Console.WriteLine("********************************************* \n");
+    }
+    else
+    {
+        Console.WriteLine("La lista de pedidos Esta vacia");
+    }
+}
+
+/*
     public void mostrarPedidosPorEStado( int estado){
         estado--;//para que la opcion ingresada disminuya al valor de arrayEstados
         bool hayPedidos = false;
@@ -86,6 +111,7 @@ public class Cadeteria
 
         }
     }
+    */
 
     public void agregarCadete(string nombre, string direccion, string telefono)
     {
