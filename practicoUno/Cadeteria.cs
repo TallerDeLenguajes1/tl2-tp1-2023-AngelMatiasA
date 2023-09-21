@@ -43,7 +43,7 @@ public class Cadeteria
 
     } 
 
-//la persona tendra que ingresar en interfaz los tipos d estado 0 1 2
+///(version sin linq )la persona tendra que ingresar en interfaz los tipos d estado 0 1 2
    /* public void cambiarEStadoPedido( int idPedido, int estado){
         string estadoAnterior ="";
         estado--;
@@ -97,7 +97,7 @@ public void mostrarPedidosPorEStado(int estado)
     }
 }
 
-/*
+/*(version sin linq )
     public void mostrarPedidosPorEStado( int estado){
         estado--;//para que la opcion ingresada disminuya al valor de arrayEstados
         bool hayPedidos = false;
@@ -153,25 +153,41 @@ public void mostrarPedidosPorEStado(int estado)
     {
         return this.cadetes;
     }
-    public void asignarPedidos(int idPedido, int idCadete)
-    {
-        Pedidos pedidoAux;
-        foreach (Pedidos Pedido in getListaPedidos())
-        {
-            if (idPedido == Pedido.NroPedido)
-            {
-                foreach (Cadete cadeteAsignar in this.cadetes)
-                {
-                    if (idCadete == cadeteAsignar.Id)
-                    {
-                        cadeteAsignar.asignarPedido(Pedido);
-                        Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id" +
-                        $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
-                    }
-                }
-            }
-        }
+    // (version sin linq )public void asignarPedidos(int idPedido, int idCadete)
+    // {
+    //     Pedidos pedidoAux;
+    //     foreach (Pedidos Pedido in getListaPedidos())
+    //     {
+    //         if (idPedido == Pedido.NroPedido)
+    //         {
+    //             foreach (Cadete cadeteAsignar in this.cadetes)
+    //             {
+    //                 if (idCadete == cadeteAsignar.Id)
+    //                 {
+    //                     cadeteAsignar.asignarPedido(Pedido);
+    //                     Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id" +
+    //                     $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
+    //                 }
+    //             }
+    //         }
+    //     }
 
+    // } 
+     public void asignarPedidos(int idPedido, int idCadete)
+    {
+         var pedido = this.lisPedCadeteria
+        .FirstOrDefault(p => p.NroPedido == idPedido);
+    if (pedido != null)
+    {
+        var cadete = this.cadetes
+            .FirstOrDefault(c => c.Id == idCadete);
+        if (cadete != null)
+        {
+            cadete.asignarPedido(pedido);
+            Console.WriteLine($"Pedido nro {pedido.NroPedido} asignado al cadete id" +
+                $"{cadete.Id}: {cadete.Nombre}");
+        }
+    }
     }
     // le tendria que pasar el parametro List<Cadete> cadetesAMostrar
 
