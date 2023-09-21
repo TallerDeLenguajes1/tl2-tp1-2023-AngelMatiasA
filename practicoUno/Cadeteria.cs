@@ -44,7 +44,7 @@ public class Cadeteria
     } 
 
 //la persona tendra que ingresar en interfaz los tipos d estado 0 1 2
-    public void cambiarEStadoPedido( int idPedido, int estado){
+   /* public void cambiarEStadoPedido( int idPedido, int estado){
         string estadoAnterior ="";
         estado--;
         foreach (Pedidos pedido in this.lisPedCadeteria)
@@ -59,6 +59,18 @@ public class Cadeteria
                 Console.WriteLine(pedido.ToString());
             }
         }
+    }*/
+    public void cambiarEStadoPedido(int idPedido, int estado){
+        string estadoAnterior=""; 
+        estado --;
+        var pedido = this.lisPedCadeteria.FirstOrDefault(p=>p.NroPedido == idPedido); 
+        if (pedido!= null){
+            estadoAnterior = pedido.Estado; 
+            pedido.Estado = pedido.getarreglosEstados(estado);
+             Console.WriteLine($" \n Estado anterior {estadoAnterior}");
+                Console.WriteLine(pedido.ToString());
+        }
+
     }
 
 public void mostrarPedidosPorEStado(int estado)
