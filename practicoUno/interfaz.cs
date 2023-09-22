@@ -105,6 +105,17 @@ public class interfaz
         case 7: 
             cadeteria.mostrarPedidosCadeteria();
             break;
+         case 8:
+            // Llamada al método para reasignar el pedido a otro cadete
+            // ReasignarPedidoAOtroCadete();
+            Console.WriteLine("ingrese el nro  del cadete para ver el jornal a cobrar ");
+               int idcadJornal =  Convert.ToInt32(Console.ReadLine());
+               var cadeNombre = cadeteria.getListaCadetes().FirstOrDefault(c => c.Id == idcadJornal); 
+
+            Console.WriteLine( $"el monto a cobrar del cadete {cadeNombre.Nombre} es de: "+ cadeteria.JornalACobrar(idcadJornal));
+
+             
+            break;    
         
         default:
             Console.WriteLine("Opción no válida");

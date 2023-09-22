@@ -77,6 +77,7 @@ public class Cadete
             }
 
         }
+        
         if (pedidoAux!= null)
         {
             this.listaPedidos.Remove(pedidoAux);
@@ -92,11 +93,11 @@ public class Cadete
     }
    
 
-     public void reasignarPedido ( Pedidos cambioPedido){ 
+    //  public void reasignarPedido ( Pedidos cambioPedido){ 
         
-        this.listaPedidos.Add(cambioPedido);
+    //     this.listaPedidos.Add(cambioPedido);
 
-    }
+    // }
 
     //falta mostrar la lista de los pedidos d cada cadete
 

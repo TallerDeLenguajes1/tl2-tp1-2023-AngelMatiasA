@@ -1,6 +1,7 @@
 using System;
 using EspacioCadete;
 using EspacioPedidos;
+using System.Linq;
 namespace EspacioCadeteria;
 
 public class Cadeteria
@@ -228,42 +229,42 @@ public void mostrarPedidosPorEStado(int estado)
     //y la cantidad de envíos de cada cadete y el total. Muestre también la cantidad de
     //envíos promedio por cadete.
 
-    public double montoGanado(List<Cadete> cadetes){
-        double total = 0; 
-        foreach (Cadete cadete in cadetes)
-        {
-            foreach (Pedidos pedido in cadete.ListaPedidos)
-            {
-                if(pedido.Estado == pedido.getarreglosEstados(2)){
-                    total +=500;
-                }
-            }
+    // public double montoGanado(List<Cadete> cadetes){
+    //     double total = 0; 
+    //     foreach (Cadete cadete in cadetes)
+    //     {
+    //         foreach (Pedidos pedido in cadete.ListaPedidos)
+    //         {
+    //             if(pedido.Estado == pedido.getarreglosEstados(2)){
+    //                 total +=500;
+    //             }
+    //         }
             
             
-        }
+    //     }
 
-        return total;
-    }
+    //     return total;
+    // }
     //la cantidad de envíos de cada cadete y el total.
-    public string[] cantEnviosXCadete(Cadete cadete){
-        int cantxCadete = 0; 
-        //nqv falta ver bien
-        string [] informeIndividual = {"nombre", "catidad"};
+    // public string[] cantEnviosXCadete(Cadete cadete){
+    //     int cantxCadete = 0; 
+    //     //nqv falta ver bien
+    //     string [] informeIndividual = {"nombre", "catidad"};
       
         
        
-            foreach (Pedidos pedido in cadete.ListaPedidos)
-            {
-                if(pedido.Estado == pedido.getarreglosEstados(2)){
+    //         foreach (Pedidos pedido in cadete.ListaPedidos)
+    //         {
+    //             if(pedido.Estado == pedido.getarreglosEstados(2)){
                    
-                }
-            }
+    //             }
+    //         }
             
             
        
 
-        return informeIndividual;
-    }
+    //     return informeIndividual;
+    // }
 
      public void mostrarPedidosCadeteria()
     {
@@ -331,19 +332,33 @@ public void mostrarPedidosPorEStado(int estado)
         removerPedido(idCadeteRemover, idPedido);
     }
 
-    //nose si es que puede o no ser estatico (no puede si uso this.cadetes)
+ 
     public  void removerPedido( int idKdTCancelado, int idPedRemovido){
-        foreach (Cadete cadete in this.cadetes)
-        {
-            if (idKdTCancelado == cadete.Id)
-            {
-                Console.WriteLine("se remueve el pedido "); 
+
+        var cadete = this.cadetes.FirstOrDefault(c => c.Id == idKdTCancelado);
+        if (cadete != null){
+            Console.WriteLine("se remueve el pedido "); 
                 cadete.RemoverPedido(idPedRemovido);
-                
-            }
-            
+
+        }
+    } 
+
+    /*● Agregar el método JornalACobrar en la clase Cadeteria que recibe como
+parámetro el id del cadete y devuelve el monto a cobrar para dicho cadete
+*/
+    public double JornalACobrar(int idCadete ){
+        double montoACobrar = 0; 
+        var cadete = this.cadetes.FirstOrDefault(c => c.Id == idCadete); 
+        if (cadete != null ){
+            var cantPedidosRealizados = cadete.ListaPedidos
+            .Where(
+                pedido => String.Equals(pedido.Estado, pedido.getarreglosEstados(2), StringComparison.OrdinalIgnoreCase)
+                ).ToList().Count; 
+                montoACobrar = 500* cantPedidosRealizados;
         }
 
+
+        return montoACobrar;
 
     }
 
