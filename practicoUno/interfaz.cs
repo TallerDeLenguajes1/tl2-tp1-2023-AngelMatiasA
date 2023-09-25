@@ -43,6 +43,8 @@ public class interfaz
             finalizar = true; 
              informeNuev = new Informe(cadeteria);
              informeNuev.mostrarInforme();
+             AccesoJSON datosJson = new AccesoJSON();
+             datosJson.GuardarInforme("Informe.json", informeNuev);
             break;
 
         case 1:

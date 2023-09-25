@@ -15,9 +15,13 @@ public class Informe
    private double enviPromedXCadete; 
    private int totalEnvios;
    Cadeteria cadeteria; 
-   List<LisInforme> nuevaLisInf; 
+   private List<LisInforme> nuevaLisInf;
 
-public Informe (){     
+    public List<LisInforme> NuevaLisInf { get ; set ; }
+    public int TotalEnvios { get ; set ; }
+    public double EnviPromedXCadete { get ; set ; }
+
+    public Informe (){     
    }
 
    public Informe (Cadeteria nuevacadeteria){
@@ -62,7 +66,7 @@ public Informe (){
           LisInforme lisinforme;
           int cantidadDeCadetes = cadeteria.getListaCadetes().Count;
 
-        nuevaLisInf = new List<LisInforme>();
+        NuevaLisInf = new List<LisInforme>();
         foreach (Cadete cadete in this.cadeteria.getListaCadetes())
         {totalEnvixCad = 0; 
         lisinforme = new LisInforme();
@@ -79,7 +83,7 @@ public Informe (){
             lisinforme.setMontoGanadoCade(totalEnvixCad *500);
             lisinforme.setNomCade(cadete.Nombre); 
             lisinforme.setIdCade(cadete.Id); 
-            nuevaLisInf.Add(lisinforme); 
+            NuevaLisInf.Add(lisinforme); 
             totalEnvios +=  totalEnvixCad;
         } 
         this.enviPromedXCadete = Convert.ToDouble(totalEnvios) / Convert.ToDouble(cantidadDeCadetes);
@@ -89,9 +93,9 @@ public Informe (){
         Console.WriteLine("Informe \n \n "); 
         Console.WriteLine($"El total de envios es de {totalEnvios}");
         
-        Console.WriteLine($"El promedio de envios por cadetes  es de {this.enviPromedXCadete}");
+        Console.WriteLine($"El promedio de envios por cadetes  es de {this.EnviPromedXCadete}");
         
-        foreach (var inform in this.nuevaLisInf)
+        foreach (var inform in this.NuevaLisInf)
         {
             Console.WriteLine("Cadete nro " + inform.getIdCade());
             Console.WriteLine("Nombre : "+ inform.getNomCade());
@@ -146,10 +150,10 @@ public class LisInforme
    private string nombreCadete = "" ; 
    private int idCadete= 0;
 
-    public int CantxCade { get; internal set; }
-    public int MontoGanadoCade { get; internal set; }
-    public string NomCade { get; internal set; }
-    public int IdCade { get; internal set; }
+    public int CantPorCadete { get; set; }
+    public int MontoGanado { get; set; }
+    public string NombreCadete { get; set; }
+    public int IdCadete { get; set; }
 
     public LisInforme(){
 
