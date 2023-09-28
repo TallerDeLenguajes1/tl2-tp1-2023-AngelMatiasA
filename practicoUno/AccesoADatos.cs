@@ -28,11 +28,11 @@ public class AccesoADatos
          
         StreamReader lector =  existeCsv(nombreArchivo); 
         if (lector!= null)
-        {   //tendria que estar aca o dentro del while la instanciacion?
+        {   
            // Cadete nuevoCadete = new Cadete();
             
              string pirmeraLinea = lector.ReadLine();
-             Console.WriteLine("primera linea del metodo cargar cadetes" + pirmeraLinea);
+            
              while (!lector.EndOfStream  )
              { 
                 Cadete nuevoCadete = new Cadete();
