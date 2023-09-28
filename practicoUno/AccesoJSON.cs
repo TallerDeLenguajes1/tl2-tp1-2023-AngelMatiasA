@@ -22,9 +22,9 @@ namespace EspacioDatos
         public void GuardarInforme(string nombreArchivo, Informe inform){
         string listaJSON = JsonSerializer.Serialize(inform);
 
-        if(!File.Exists(nombreArchivo)){
+        
             File.WriteAllText(nombreArchivo, listaJSON);
-        }
+        
     }
 
     }

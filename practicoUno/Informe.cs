@@ -17,18 +17,18 @@ public class Informe
    Cadeteria cadeteria; 
    private List<LisInforme> nuevaLisInf;
 
-    public List<LisInforme> NuevaLisInf { get ; set ; }
-    public int TotalEnvios { get ; set ; }
-    public double EnviPromedXCadete { get ; set ; }
+
+    public int TotalEnvios { get => totalEnvios; set => totalEnvios = value; }
+    public double EnviPromedXCadete { get => enviPromedXCadete; set => enviPromedXCadete = value; }
+    public List<LisInforme> NuevaLisInf {  get => nuevaLisInf; set => nuevaLisInf = value; }
 
     public Informe (){     
    }
 
    public Informe (Cadeteria nuevacadeteria){
+         nuevaLisInf = new List<LisInforme>();
       
         CargarInforme( nuevacadeteria);
-
-    
    
    }
 
@@ -60,15 +60,17 @@ public class Informe
     double enviPromedXCadete = (double)totalEnvios / cantidadDeCadetes;
 }*/
 
-    private  void CargarInforme (Cadeteria nuevacadeteria){
+    public  void CargarInforme (Cadeteria nuevacadeteria){
           this.cadeteria = nuevacadeteria;
           int totalEnvixCad= 0; 
           LisInforme lisinforme;
           int cantidadDeCadetes = cadeteria.getListaCadetes().Count;
+          nuevaLisInf = new List<LisInforme>();
 
-        NuevaLisInf = new List<LisInforme>();
+       
         foreach (Cadete cadete in this.cadeteria.getListaCadetes())
-        {totalEnvixCad = 0; 
+        {
+            totalEnvixCad = 0; 
         lisinforme = new LisInforme();
                             
             Console.WriteLine($"el pedido es para {cadete.Direccion} cadete nro {cadete.Nombre}");
@@ -79,23 +81,23 @@ public class Informe
                     totalEnvixCad ++;
                 }
             } 
-            lisinforme.setCantxCade(totalEnvixCad);
-            lisinforme.setMontoGanadoCade(totalEnvixCad *500);
-            lisinforme.setNomCade(cadete.Nombre); 
-            lisinforme.setIdCade(cadete.Id); 
-            NuevaLisInf.Add(lisinforme); 
-            totalEnvios +=  totalEnvixCad;
+            lisinforme.CantPorCadete = totalEnvixCad;
+            lisinforme.MontoGanado =totalEnvixCad *500;
+            lisinforme.NombreCadete=cadete.Nombre; 
+            lisinforme.IdCadete=cadete.Id; 
+            nuevaLisInf.Add(lisinforme); 
+            TotalEnvios +=  totalEnvixCad;
         } 
-        this.enviPromedXCadete = Convert.ToDouble(totalEnvios) / Convert.ToDouble(cantidadDeCadetes);
+        EnviPromedXCadete = Convert.ToDouble(totalEnvios) / Convert.ToDouble(cantidadDeCadetes);
 
     } 
     public void mostrarInforme (){
         Console.WriteLine("Informe \n \n "); 
         Console.WriteLine($"El total de envios es de {totalEnvios}");
         
-        Console.WriteLine($"El promedio de envios por cadetes  es de {this.EnviPromedXCadete}");
+        Console.WriteLine($"El promedio de envios por cadetes  es de {EnviPromedXCadete}");
         
-        foreach (var inform in this.NuevaLisInf)
+        foreach (var inform in this.nuevaLisInf)
         {
             Console.WriteLine("Cadete nro " + inform.getIdCade());
             Console.WriteLine("Nombre : "+ inform.getNomCade());
@@ -145,20 +147,25 @@ public class EjecInforme{
 
 public class LisInforme
 {
-   private double montoGanado= 0.0; 
-   private int cantPorCadete = 0; 
-   private string nombreCadete = "" ; 
-   private int idCadete= 0;
 
-    public int CantPorCadete { get; set; }
-    public int MontoGanado { get; set; }
-    public string NombreCadete { get; set; }
-    public int IdCadete { get; set; }
+   private int idCadete= 0;
+   private string nombreCadete = "" ; 
+   private int cantPorCadete = 0;
+   private double montoGanado= 0.0; 
+    
+   
+
+    public int IdCadete {  get => idCadete; set => idCadete = value; }
+    public string NombreCadete {  get => nombreCadete; set => nombreCadete = value; }
+    public int CantPorCadete {  get => cantPorCadete; set => cantPorCadete = value; }
+    public double MontoGanado {  get => montoGanado; set => montoGanado = value; }
+   
 
     public LisInforme(){
 
    }
     public LisInforme(int id, string nombre, int cant, double ganancias){ 
+       
         this.idCadete = id; 
         this.nombreCadete = nombre; 
         this.cantPorCadete = cant; 
