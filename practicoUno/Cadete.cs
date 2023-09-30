@@ -54,6 +54,9 @@ public class Cadete
         return nuevoPedido;
 
     }
+
+    /*
+
      public void asignarPedido ( Pedidos pedidoAsignar){ 
         pedidoAsignar.Estado = pedidoAsignar.getarreglosEstados(1);
         pedidoAsignar.setIdCadetePedidos(this.Id);
@@ -66,6 +69,8 @@ public class Cadete
     //cadete (tipo foreign key) que tiene el pedido
     //y hago un foreach para buscar esecadete y ahi le 
     //remuevo de su lista y lo reasigno a otro con asignar pedido
+ 
+ 
     public void RemoverPedido(int idPedido){ 
         Pedidos pedidoAux = null;
         foreach (Pedidos item in this.listaPedidos)
@@ -92,14 +97,7 @@ public class Cadete
         
     }
    
+   */
 
-    //  public void reasignarPedido ( Pedidos cambioPedido){ 
-        
-    //     this.listaPedidos.Add(cambioPedido);
-
-    // }
-
-    //falta mostrar la lista de los pedidos d cada cadete
-
-   
+  
 }

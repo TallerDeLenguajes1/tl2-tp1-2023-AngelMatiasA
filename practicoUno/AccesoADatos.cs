@@ -16,20 +16,18 @@ public class AccesoADatos
 
     }
 
-    //metodo para verificar si existe y devuelve el archivo null o reader
+  
     public static StreamReader existeCsv(string nombreCsv){
         StreamReader reader = new StreamReader(File.OpenRead(@nombreCsv));
         return reader;
       
     }
-     // se podria pasar x referencia? como? 
-    // ahi podria hacer una condicion q devuelva true or false
+    
     public void cargarCadetes(string nombreArchivo, Cadeteria cadeteria){
          
         StreamReader lector =  existeCsv(nombreArchivo); 
         if (lector!= null)
         {   
-           // Cadete nuevoCadete = new Cadete();
             
              string pirmeraLinea = lector.ReadLine();
             
@@ -108,43 +106,6 @@ public class AccesoADatos
         }
         return PedidosCsv;
     }
-
-    // se podria pasar x referencia? como? 
-    // ahi podria hacer una condicion q devuelva true or false
- /*   public List<Cadete> leerCadetes(string nombreArchivo){
-          List<Cadete> CadetesCsv = new List<Cadete>();  
-          Cadeteria nueva = new Cadeteria();
-        StreamReader lector =  existeCsv(nombreArchivo); 
-        if (lector!= null)
-        {   //tendria que estar aca o dentro del while la instanciacion?
-           // Cadete nuevoCadete = new Cadete();
-            
-             string pirmeraLinea = lector.ReadLine();
-             Console.WriteLine("primera linea y segunda" + pirmeraLinea);
-             while (!lector.EndOfStream  )
-             { 
-                Cadete nuevoCadete = new Cadete();
-                var linea = lector.ReadLine(); 
-                var values = linea.Split(';');
-                nuevoCadete.Nombre = values[0];
-                Console.WriteLine($"nombre" + values[0]);
- 
-
-                nuevoCadete.Direccion = values[1]; 
-                nuevoCadete.Telefono = values[2];  
-                
-
-                CadetesCsv.Add(nuevoCadete);
-                
-             }
-             nueva.mostrarCadetes();
-            
-        }
-       
-
-        return CadetesCsv;
-    }
-*/
     public void leerCsv(){
         StreamReader reader = new StreamReader(File.OpenRead(@"informe.csv"));
         if (reader != null)

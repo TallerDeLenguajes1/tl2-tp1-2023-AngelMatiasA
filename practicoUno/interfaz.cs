@@ -90,10 +90,11 @@ public class interfaz
             // ReasignarPedidoAOtroCadete();
             Console.WriteLine("ingrese el nro  de pedido ");
                int idPedido =  Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("ingrese el nombre del cadete para reasignarle el pedido ");
+            Console.WriteLine("ingrese el id del cadete para reasignarle el pedido ");
 
-               string nombreCadete = Console.ReadLine();
-            cadeteria.reasignarPedidos(idPedido, nombreCadete);
+               int idCadReasig ;
+                int.TryParse(Console.ReadLine(), out idCadReasig);
+            cadeteria.reasignarPedidos(idPedido, idCadReasig);
             break;
         case 5: 
             cadeteria.mostrarCadetes();

@@ -32,34 +32,6 @@ public class Informe
    
    }
 
-    // private static void CargarInforme(Cadeteria cadeteria)
-    // {
-    //     throw new NotImplementedException();
-    // }
-
-  /*  private void CargarInforme(Cadeteria nuevacadeteria)
-{
-    this.cadeteria = nuevacadeteria;
-    int totalEnvios = 0;
-    int cantidadDeCadetes = cadeteria.getListaCadetes().Count;
-
-    nuevaLisInf = this.cadeteria.getListaCadetes().Select(cadete =>
-    {
-        int totalEnvixCad = cadete.ListaPedidos.Count(pedido => pedido.Estado == pedido.getarreglosEstados(2));
-        totalEnvios += totalEnvixCad;
-
-        return new LisInforme
-        {
-            CantxCade = totalEnvixCad,
-            MontoGanadoCade = totalEnvixCad * 500,
-            NomCade = cadete.Nombre,
-            IdCade = cadete.Id
-        };
-    }).ToList();
-
-    double enviPromedXCadete = (double)totalEnvios / cantidadDeCadetes;
-}*/
-
     public  void CargarInforme (Cadeteria nuevacadeteria){
           this.cadeteria = nuevacadeteria;
           int totalEnvixCad= 0; 
@@ -75,12 +47,12 @@ public class Informe
                             
             Console.WriteLine($"el pedido es para {cadete.Direccion} cadete nro {cadete.Nombre}");
 
-            foreach (Pedidos pedido in cadete.ListaPedidos)
-            {
-                if(pedido.Estado == pedido.getarreglosEstados(2)){
-                    totalEnvixCad ++;
-                }
-            } 
+          
+            totalEnvixCad = cadeteria.getListaPedidos()
+            .Where(
+                pedido => String.Equals(pedido.Estado, pedido.getarreglosEstados(2), StringComparison.OrdinalIgnoreCase) 
+                && pedido.CadetePed != null && pedido.CadetePed.Id == cadete.Id
+                ).ToList().Count;
             lisinforme.CantPorCadete = totalEnvixCad;
             lisinforme.MontoGanado =totalEnvixCad *500;
             lisinforme.NombreCadete=cadete.Nombre; 
@@ -126,24 +98,7 @@ public class Informe
 }//fin de la clase Informe
 
 //comienza la clase ejecinforme
-public class EjecInforme{
-    
 
-    private Informe informNuevo;
-
-    public EjecInforme(){
-        informNuevo = new Informe(); 
-    }
-     public EjecInforme(Cadeteria pCadeteria){
-      
-        informNuevo = new Informe(pCadeteria); 
-    }
-
-    // public IEnumerable<Informe>  getInforme(){
-    //     return informNuevo.ToArray<Informe>;
-
-    // }
-}
 
 public class LisInforme
 {

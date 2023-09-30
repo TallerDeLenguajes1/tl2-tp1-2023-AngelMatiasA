@@ -178,13 +178,16 @@ public void mostrarPedidosPorEStado(int estado)
     {
          var pedido = this.lisPedCadeteria
         .FirstOrDefault(p => p.NroPedido == idPedido);
+
     if (pedido != null)
     {
         var cadete = this.cadetes
             .FirstOrDefault(c => c.Id == idCadete);
         if (cadete != null)
         {
-            cadete.asignarPedido(pedido);
+            //cambie solo esta parte p asignarle el cadete a pedido
+            pedido.CadetePed = cadete;
+            pedido.Estado = pedido.getarreglosEstados(1);
             Console.WriteLine($"Pedido nro {pedido.NroPedido} asignado al cadete id" +
                 $"{cadete.Id}: {cadete.Nombre}");
         }
@@ -193,25 +196,7 @@ public void mostrarPedidosPorEStado(int estado)
     // le tendria que pasar el parametro List<Cadete> cadetesAMostrar
 
 
-    public void asignarPedidos(int idPedido, string nombreCadete)
-    {
-        // Pedidos pedidoAux;
-        foreach (Pedidos Pedido in getListaPedidos())
-        {
-            if (idPedido == Pedido.NroPedido)
-            {
-                foreach (Cadete cadeteAsignar in this.cadetes)
-                {
-                    if (String.Equals(nombreCadete, cadeteAsignar.Nombre, StringComparison.OrdinalIgnoreCase))
-                    {
-                        cadeteAsignar.asignarPedido(Pedido);
-                        Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete de id: " +
-                        $"{cadeteAsignar.Id}, {cadeteAsignar.Nombre}");
-                    }
-                }
-            }
-        }
-    }
+    
     public void mostrarCadetes()
     {
         foreach (Cadete Cadete in this.cadetes)
@@ -307,46 +292,38 @@ public void mostrarPedidosPorEStado(int estado)
 //hacerlo q busqe x id tmb.. hya una pequeña incongruencia cuando el usuario
 //no ingresa el nombre o no coincide.. igual se le remueve de la lista del otro
 //usuario.. estaria bueno una tipo promesa...
-    public void reasignarPedidos(int idPedido, string NombreCadeteAsignar)
+    public void reasignarPedidos(int idPedido, int idCadete)
     {
-        Pedidos? pedidos;
-        int idCadeteRemover = 0;
-        foreach (Pedidos pedido in this.lisPedCadeteria)
-        {
-            if (idPedido == pedido.NroPedido)
-            {
-                idCadeteRemover = pedido.getIdCadetePedidos();
-                foreach (Cadete cadeteRequerido in this.cadetes)
-                {
-                    if (String.Equals(NombreCadeteAsignar, cadeteRequerido.Nombre, StringComparison.OrdinalIgnoreCase))
-                    {
-                        cadeteRequerido.asignarPedido(pedido);
-
-
-                    }
-                }
-
-            }
-
-        }
-        removerPedido(idCadeteRemover, idPedido);
+        asignarPedidos(idPedido, idCadete);
     }
 
  
-    public  void removerPedido( int idKdTCancelado, int idPedRemovido){
-
-        var cadete = this.cadetes.FirstOrDefault(c => c.Id == idKdTCancelado);
-        if (cadete != null){
-            Console.WriteLine("se remueve el pedido "); 
-                cadete.RemoverPedido(idPedRemovido);
-
+    public  void eliminarPedido( int idPedRemovido){
+        var pedido = lisPedCadeteria.FirstOrDefault
+        (p => p.NroPedido == idPedRemovido); 
+        if (pedido != null)
+        {
+            lisPedCadeteria.Remove(pedido);
+            
         }
+
+        
     } 
 
     /*● Agregar el método JornalACobrar en la clase Cadeteria que recibe como
 parámetro el id del cadete y devuelve el monto a cobrar para dicho cadete
 */
+
+/*
+****************************************** ARREGLAR ************ 
+        NO ANDA PORQUE YA NO EXISTE LA LISTA PEDIDOS DE CADETES
+
+*/
     public double JornalACobrar(int idCadete ){
+        // hacer doble condicion que el id de cadete coincida en 
+        //los pedidos.cadetes.id y que el estado de ese pedido sea entregado
+        // o armo una lista de los pedidos del cadete y de ahi me fijo 
+        // oevaluo esa doble condicion de una con un where.. 
         double montoACobrar = 0; 
         var cadete = this.cadetes.FirstOrDefault(c => c.Id == idCadete); 
         if (cadete != null ){
