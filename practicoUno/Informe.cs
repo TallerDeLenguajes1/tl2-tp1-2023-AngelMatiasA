@@ -82,12 +82,12 @@ public class Informe
         double totalEnvixCad = 0; 
         foreach (Cadete cadete in cadetes)
         {
-            foreach (Pedidos pedido in cadete.ListaPedidos)
-            {
-                if(pedido.Estado == pedido.getarreglosEstados(2)){
-                    totalEnvixCad +=500;
-                }
-            }
+            // foreach (Pedidos pedido in cadete.ListaPedidos)
+            // {
+            //     if(pedido.Estado == pedido.getarreglosEstados(2)){
+            //         totalEnvixCad +=500;
+            //     }
+            // }
             
             
         }

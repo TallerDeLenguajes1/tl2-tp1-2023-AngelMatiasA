@@ -319,6 +319,7 @@ parámetro el id del cadete y devuelve el monto a cobrar para dicho cadete
         NO ANDA PORQUE YA NO EXISTE LA LISTA PEDIDOS DE CADETES
 
 */
+//se lo esta llamando en el caso 8 sel switch
     public double JornalACobrar(int idCadete ){
         // hacer doble condicion que el id de cadete coincida en 
         //los pedidos.cadetes.id y que el estado de ese pedido sea entregado

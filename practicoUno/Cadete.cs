@@ -7,24 +7,27 @@ namespace EspacioCadete;
 
 public class Cadete
 {
-    static int cant = 0; 
-    int id = 0; 
-    string direccion; 
+    private static int cant = 0; 
+    private int id = 0; 
+    private string direccion; 
     private string nombre;
-    string telefono;  
+    private string telefono;  
     List<Pedidos> listaPedidos;
 
     Pedidos nuevoPedido;
 
     public List<Pedidos> ListaPedidos { get => listaPedidos; set => listaPedidos = value; }
-    public string Telefono { get => telefono; set => telefono = value; }
-    public string Direccion { get => direccion; set => direccion = value; }
-    public int Id { get => id; set => id = value; }
-    public string Nombre { get => nombre; set => nombre = value; }
+    // public string Telefono { get => telefono; set => telefono = value; }
+    // public string Direccion { get => direccion; set => direccion = value; }
+    // public int Id { get => id; set => id = value; }
+    // public string Nombre { get => nombre; set => nombre = value; }
+     public string Nombre { get; set; }
+    public string Direccion { get; set; }
+    public string Telefono { get; set; }
+    public int Id { get; private set; }
 
     public Cadete (){
         this.id = cant; 
-        listaPedidos = new List<Pedidos>();
         cant++;
     }
      public Cadete (string nombre, string direccion, string telefono){
@@ -32,7 +35,6 @@ public class Cadete
         this.nombre = nombre; 
         this.direccion = direccion ; 
         this.telefono = telefono;
-        listaPedidos = new List<Pedidos>();
         cant++;
     }
   

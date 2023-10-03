@@ -12,7 +12,8 @@ public class interfaz
     int opcion1 = 0;
     Cadeteria cadeteria;
     Informe informeNuev;
-    AccesoCSV datos = new AccesoCSV();
+    AccesoCSV datos;
+    AccesoADatos datosJson; 
 
 
 
@@ -130,7 +131,11 @@ public class interfaz
 
     public void cargarDatos(){
         datos = new AccesoCSV();
-        cadeteria = new Cadeteria(datos.cargarCadetes("Cadete.csv"));
+        datosJson = new AccesoJSON();
+        // cadeteria = new Cadeteria(datos.cargarCadetes("Cadete.csv"));
+        cadeteria = new Cadeteria(datosJson.cargarCadetes("Cadete.json"));
+        
+        // si declaro al obj del tipo padre, no puede usar metodos propios de la clase hija?
         cadeteria.asignarPedidosTesting(datos.CargarPedidos("Pedidos.csv"));
        
 
