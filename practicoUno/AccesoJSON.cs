@@ -20,14 +20,19 @@ public class AccesoJSON : AccesoADatos
     // }
     public override List<Cadete> cargarCadetes(string nombreArchivo)
     {
-           List<Cadete> CadetesJson =  new List<Cadete>(); 
         if (existeArchivo(nombreArchivo))
         {
             using (var streamReader = new StreamReader(nombreArchivo))
             {
                 var json = streamReader.ReadToEnd();
                 Console.WriteLine(" Se imprime el json "+json);
-                 CadetesJson = JsonSerializer.Deserialize<List<Cadete>>(json);
+                int i = 1;
+                 List<Cadete> CadetesJson = JsonSerializer.Deserialize<List<Cadete>>(json);
+                 foreach (var item in CadetesJson)
+                 {
+                    item.Id = i++; 
+                    
+                 }
                 return CadetesJson;
             }
         }
@@ -37,6 +42,40 @@ public class AccesoJSON : AccesoADatos
             return null;
         }
     }
+
+    /* 
+      public override List<Cadete> cargarCadetes(string nombreArchivo)
+    {
+        List<Cadete> cadetes = new List<Cadete>();
+        //    List<Cadete> CadetesJson =  new List<Cadete>(); 
+        Cadete cadete;
+        if (existeArchivo(nombreArchivo))
+        {
+            using (var streamReader = new StreamReader(nombreArchivo))
+            {
+                var json = streamReader.ReadToEnd();
+                Console.WriteLine(" Se imprime el json "+json);
+                 List<Cadete> CadetesJson = JsonSerializer.Deserialize<List<Cadete>>(json);
+                 
+                 
+                 foreach (Cadete cade in CadetesJson)
+                 { 
+                    cadete = new Cadete(cade.Nombre, cade.Direccion, cade.Telefono); 
+                    cadetes.Add(cadete);
+                    
+                 }
+                return cadetes;
+            }
+        }
+        else
+        {
+            Console.WriteLine($"El archivo {nombreArchivo} no existe.");
+            return null;
+        }
+    }
+    
+    
+    */
 
     public void GuardarInforme(string nombreArchivo, Informe inform)
     {

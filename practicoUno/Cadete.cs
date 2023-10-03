@@ -24,7 +24,7 @@ public class Cadete
      public string Nombre { get; set; }
     public string Direccion { get; set; }
     public string Telefono { get; set; }
-    public int Id { get; private set; }
+    public int Id { get;  set; }
 
     public Cadete (){
         this.id = cant; 
