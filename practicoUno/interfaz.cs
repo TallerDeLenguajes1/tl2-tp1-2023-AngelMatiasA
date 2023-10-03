@@ -12,7 +12,7 @@ public class interfaz
     int opcion1 = 0;
     Cadeteria cadeteria;
     Informe informeNuev;
-    AccesoADatos datos = new AccesoADatos();
+    AccesoCSV datos = new AccesoCSV();
 
 
 
@@ -129,8 +129,8 @@ public class interfaz
 
 
     public void cargarDatos(){
-        datos = new AccesoADatos();
-        cadeteria = new Cadeteria(datos.leerCadetes("Cadete.csv"));
+        datos = new AccesoCSV();
+        cadeteria = new Cadeteria(datos.cargarCadetes("Cadete.csv"));
         cadeteria.asignarPedidosTesting(datos.CargarPedidos("Pedidos.csv"));
        
 

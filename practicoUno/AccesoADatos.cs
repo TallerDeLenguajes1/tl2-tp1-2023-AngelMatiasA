@@ -8,134 +8,48 @@ using EspacioPedidos;
 
 namespace EspacioDatos; 
 
-public class AccesoADatos
+public abstract class AccesoADatos
 {
-    Cadete nuevoCadete = new Cadete();  
+     
     
     public AccesoADatos(){
 
     }
 
-  
-    public static StreamReader existeCsv(string nombreCsv){
-        StreamReader reader = new StreamReader(File.OpenRead(@nombreCsv));
-        return reader;
-      
-    }
-    
-    public void cargarCadetes(string nombreArchivo, Cadeteria cadeteria){
-         
-        StreamReader lector =  existeCsv(nombreArchivo); 
-        if (lector!= null)
-        {   
-            
-             string pirmeraLinea = lector.ReadLine();
-            
-             while (!lector.EndOfStream  )
-             { 
-                Cadete nuevoCadete = new Cadete();
-                var linea = lector.ReadLine(); 
-                var values = linea.Split(';');
-               
-                cadeteria.agregarCadete(values[0], values[1], values[2] );
-             }
-            
+    protected bool existeArchivo(string nombreArchivo){
+        try
+        {
+            if(File.Exists(nombreArchivo)){
+                using (var stream = File.OpenRead(nombreArchivo))
+                {
+                    if ( stream.Length > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Console.WriteLine($"Se produjo un error al intentar abrir el archivo: {ex.Message}");
+            return false;
         }
     }
+   
+    public abstract  List<Cadete> cargarCadetes(string nombreArchivo);
 
-     public List<Cadete> leerCadetes(string nombreArchivo){
-          List<Cadete> CadetesCsv = new List<Cadete>();  
-          
-        StreamReader lector =  existeCsv(nombreArchivo); 
-        if (lector!= null)
-        {   //tendria que estar aca o dentro del while la instanciacion?
-           // Cadete nuevoCadete = new Cadete();
-            
-             string pirmeraLinea = lector.ReadLine();
-            //  .Skip(1).
-            //  string lineas = File.ReadAllLines(nombreArchivo,)Skip(1);
-             Console.WriteLine("primera linea y segunda" + pirmeraLinea);
-             
-             while (!lector.EndOfStream  )
-             { 
-                Cadete nuevoCadete = new Cadete();
-                var linea = lector.ReadLine(); 
-                var values = linea.Split(';');
 
-                nuevoCadete.Nombre = values[0];
-                // Console.WriteLine($"nombre desd el csv" + values[0]);
- 
-
-                nuevoCadete.Direccion = values[1]; 
-                nuevoCadete.Telefono = values[2];  
-                
-
-                CadetesCsv.Add(nuevoCadete);
-                
-             }
-             
-            
-        }
-       
-
-        return CadetesCsv;
-    }
 
 //metodo para agilizar el testing
-      public List<Pedidos> CargarPedidos(string nombreArchivo){
-        List<Pedidos> PedidosCsv = new List<Pedidos>();  
-        StreamReader lector =  existeCsv(nombreArchivo); 
-        if (lector!= null)
-        {   
-             string pirmeraLinea = lector.ReadLine();
-             while (!lector.EndOfStream  )
-             { 
-                 Pedidos nuevoPedido = new Pedidos();
-                var linea = lector.ReadLine(); 
-                var values = linea.Split(';');
-                
-                // Console.WriteLine($"largo de la linea es de {values.Length}" );
-
-                nuevoPedido.Observacion =values[0];
-                nuevoPedido.SetNombreClien(values[1]);
-                nuevoPedido.SetClienDirecc(values[2]);
-                nuevoPedido.SetClienTelefono(values[3]);
-                nuevoPedido.SetClienDatosRef(values[4]);
-                PedidosCsv.Add(nuevoPedido);
-             }
-        }
-        return PedidosCsv;
-    }
-    public void leerCsv(){
-        StreamReader reader = new StreamReader(File.OpenRead(@"informe.csv"));
-        if (reader != null)
-        {
-              List<string> listA = new List<string>();
-        List<string> listB = new List<string>();
-        while (!reader.EndOfStream)
-        {
-            var line = reader.ReadLine();
-            var values = line.Split(';');
-
-            listA.Add(values[0]);
-            listB.Add(values[1]);
-        
-            foreach (var coloumn1 in listA)
-            {
-                Console.WriteLine(coloumn1);
-            }
-            foreach (var coloumn2 in listA)
-            {
-                Console.WriteLine(coloumn2);
-            }
-        }
-            
-        }
-         else 
-         {
-            Console.WriteLine("no se encontro el archivo");
-         }
-      
-    }
+      //public abstract List<Pedidos> CargarPedidos(string nombreArchivo);
+   
     
 }
