@@ -2,6 +2,7 @@ using EspacioCadeteria;
 using EspacioCadete;
 using EspacioDatos;
 using EspacioInforme;
+using EspacioPedidos;
 namespace EspacioInterfaz;
 
 
@@ -125,17 +126,17 @@ public class interfaz
                 cadeteria.reasignarPedidos(idPedido, idCadReasig);
                 break;
             case 5:
-                cadeteria.mostrarCadetes();
+                mostrarCadetes(cadeteria.mostrarCadetes());
                 break;
 
             case 6:
                 Console.WriteLine("ingrese \n 1) para ver Pedidos Sin asignar \n " +
                 " 2) para ver Pedidos En Proceso \n 3) para ver Pedidos Realizados \n ");
                 opcionAux = Convert.ToInt32(Console.ReadLine());
-                cadeteria.mostrarPedidosPorEStado(opcionAux);
+                mostrarPedidosCadeteria(cadeteria.mostrarPedidosPorEStado(opcionAux));
                 break;
             case 7:
-                cadeteria.mostrarPedidosCadeteria();
+                mostrarPedidosCadeteria(cadeteria.getListaPedidos());
                 break;
             case 8:
                 // Llamada al método para reasignar el pedido a otro cadete
@@ -178,6 +179,53 @@ public class interfaz
         Console.WriteLine("el nombre de la cadeteria es " + cadeteria.NombreCadeteria);
 
         Console.WriteLine("el telefono de la cadeteria es " + cadeteria.TelefonoCadeteria);
+    }
+
+     public void mostrarCadetes(List<Cadete> cadetes)
+    {
+        foreach (Cadete Cadete in cadetes)
+        {
+            Console.WriteLine("********************************************* \n");
+            Console.WriteLine($"        Cadete nro {Cadete.Id}");
+            Console.WriteLine($"Nombre: {Cadete.Nombre}. ");
+            Console.WriteLine($"Direccion: {Cadete.Direccion}. ");
+            Console.WriteLine($"Telefono: {Cadete.Telefono}. ");
+        }
+        Console.WriteLine("********************************************* \n");
+    } 
+         public void mostrarPedidosCadeteria(List<Pedidos> pedidos)
+    {
+        if (pedidos.Count >0)
+        {
+             foreach (Pedidos pedido in pedidos)
+         {  
+            //pedido.ToString();
+            Console.WriteLine(" \n *************************** \n");
+             Console.WriteLine($"       pedido nro {pedido.NroPedido}");
+            Console.WriteLine($"Estado: {pedido.Estado}. ");
+             if(pedido.CadetePed != null){
+              
+             Console.WriteLine($"Pedido enviado con {pedido.CadetePed.Nombre}. ");
+                   
+              
+
+            }
+             pedido.VerDireccionCliente();
+             Console.WriteLine("Nombre Cliente: " + pedido.NombreClien());
+            Console.WriteLine($"Observacion: {pedido.Observacion}. ");
+            // Console.Write($"Telefono: {pedido.VerDatosCliente}. ");
+            pedido.VerDatosCliente();
+        }
+        Console.WriteLine("*************************** \n");
+
+            
+        }
+        else 
+        {
+            Console.WriteLine("La lista esta Vacia");
+        }
+       
+
     }
 
 }
