@@ -14,7 +14,13 @@ public class Cadeteria
     private string nombreCadeteria = "";
     private string telefonoCadeteria = "";
 
+// cambiar construc p nombre y telef y la list d cadetes la agrego dsp
+    public Cadeteria()
+    {
+        cadetes = new List<Cadete>();
+        lisPedCadeteria = new List<Pedidos>();
 
+    }
     public Cadeteria(List<Cadete> LisCadetes)
     {
         this.cadetes = LisCadetes;
@@ -44,23 +50,7 @@ public class Cadeteria
 
     } 
 
-///(version sin linq )la persona tendra que ingresar en interfaz los tipos d estado 0 1 2
-   /* public void cambiarEStadoPedido( int idPedido, int estado){
-        string estadoAnterior ="";
-        estado--;
-        foreach (Pedidos pedido in this.lisPedCadeteria)
-        {   
-            if (idPedido == pedido.NroPedido)
-            {
-                estadoAnterior = pedido.Estado;
-                pedido.Estado = pedido.getarreglosEstados(estado);
-                //Console.WriteLine($"pedido nro {idPedido} para el cliente: "+ pedido.NombreClien()+
-                //"\n Destino: " + pedido.VerDireccionCliente + $" \n Estado anterior {estadoAnterior}");
-                  Console.WriteLine($" \n Estado anterior {estadoAnterior}");
-                Console.WriteLine(pedido.ToString());
-            }
-        }
-    }*/
+
     public void cambiarEStadoPedido(int idPedido, int estado){
         string estadoAnterior=""; 
         estado --;
@@ -98,34 +88,6 @@ public void mostrarPedidosPorEStado(int estado)
     }
 }
 
-/*(version sin linq )
-    public void mostrarPedidosPorEStado( int estado){
-        estado--;//para que la opcion ingresada disminuya al valor de arrayEstados
-        bool hayPedidos = false;
-        foreach (Pedidos pedido in this.lisPedCadeteria)
-        {
-            if (String.Equals(pedido.Estado, pedido.getarreglosEstados(estado), StringComparison.OrdinalIgnoreCase))
-            {//string nombre = pedido.NombreClien();
-                // Console.WriteLine($" Pedido nro {pedido.NroPedido},  \n Cliente {nombre }");
-                string infoPedido =  pedido.ToString();
-                Console.WriteLine("********************************************* \n");
-
-                Console.WriteLine($"{infoPedido}");
-                hayPedidos = true;
-
-               
-            }
-        }
-        Console.WriteLine("********************************************* \n");
-
-        if(!hayPedidos){
-            Console.WriteLine($"La lista de pedidos Esta vacia");
-
-
-        }
-    }
-    */
-
     public void agregarCadete(string nombre, string direccion, string telefono)
     {
 
@@ -138,9 +100,9 @@ public void mostrarPedidosPorEStado(int estado)
 
 
     }
-    public string NombreCadeteria { get => nombreCadeteria; set => nombreCadeteria = value; }
-    public string TelefonoCadeteria { get => telefonoCadeteria; set => telefonoCadeteria = value; }
-    //public List<Cadete>? Cadetes { get => Cadetes; set => Cadetes = value; }
+    public string NombreCadeteria { get ; set; }
+    public string TelefonoCadeteria { get; set; }
+    public List<Cadete>? Cadetes {  get => cadetes; set => cadetes = value; }
     /*public void CargaInicialCadetes(List<Cadete> LisCadetes)
     {
         this.cadetes=LisCadetes;    
@@ -154,26 +116,7 @@ public void mostrarPedidosPorEStado(int estado)
     {
         return this.cadetes;
     }
-    // (version sin linq )public void asignarPedidos(int idPedido, int idCadete)
-    // {
-    //     Pedidos pedidoAux;
-    //     foreach (Pedidos Pedido in getListaPedidos())
-    //     {
-    //         if (idPedido == Pedido.NroPedido)
-    //         {
-    //             foreach (Cadete cadeteAsignar in this.cadetes)
-    //             {
-    //                 if (idCadete == cadeteAsignar.Id)
-    //                 {
-    //                     cadeteAsignar.asignarPedido(Pedido);
-    //                     Console.WriteLine($"Pedido nro {Pedido.NroPedido} asignado al cadete id" +
-    //                     $"{cadeteAsignar.Id}: {cadeteAsignar.Nombre}");
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    // } 
+  
      public void asignarPedidos(int idPedido, int idCadete)
     {
          var pedido = this.lisPedCadeteria
@@ -193,7 +136,6 @@ public void mostrarPedidosPorEStado(int estado)
         }
     }
     }
-    // le tendria que pasar el parametro List<Cadete> cadetesAMostrar
 
 
     
@@ -257,7 +199,6 @@ public void mostrarPedidosPorEStado(int estado)
          {  
             //pedido.ToString();
             Console.WriteLine(" \n *************************** \n");
-
              Console.WriteLine($"       pedido nro {pedido.NroPedido}");
             //Console.Write($"Nombre del cliente: {pedido.NombreClien}. ");
             Console.WriteLine($"Estado: {pedido.Estado}. ");
@@ -268,21 +209,14 @@ public void mostrarPedidosPorEStado(int estado)
                     {
                         Console.WriteLine($"Pedido enviado con {portadorPedido.Nombre}. ");
                     }
-                    
                 }
 
             }
              pedido.VerDireccionCliente();
              Console.WriteLine("Nombre Cliente: " + pedido.NombreClien());
             Console.WriteLine($"Observacion: {pedido.Observacion}. ");
-            
-           
-            
             // Console.Write($"Telefono: {pedido.VerDatosCliente}. ");
             pedido.VerDatosCliente();
-           
-
-
         }
         Console.WriteLine("*************************** \n");
 
