@@ -261,10 +261,11 @@ parámetro el id del cadete y devuelve el monto a cobrar para dicho cadete
         double montoACobrar = 0; 
         var cadete = this.cadetes.FirstOrDefault(c => c.Id == idCadete); 
         if (cadete != null ){
-            var cantPedidosRealizados = cadete.ListaPedidos
+            var cantPedidosRealizados = this.lisPedCadeteria
             .Where(
-                pedido => String.Equals(pedido.Estado, pedido.getarreglosEstados(2), StringComparison.OrdinalIgnoreCase)
-                ).ToList().Count; 
+                pedido => String.Equals(pedido.Estado, pedido.getarreglosEstados(2), StringComparison.OrdinalIgnoreCase) 
+                && pedido.CadetePed != null && pedido.CadetePed.Id == cadete.Id
+                ).ToList().Count;
                 montoACobrar = 500* cantPedidosRealizados;
         }
 
