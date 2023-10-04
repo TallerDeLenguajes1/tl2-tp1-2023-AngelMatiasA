@@ -8,16 +8,14 @@ namespace EspacioDatos;
 public class AccesoJSON : AccesoADatos
 {
 
-    // public List<Cadete> LeerCadetes(string nombreArchivo)
-    // { //deserializacion
+    
+    public override Cadeteria cargarCadeteria(string nombreArchivo){
+        Cadeteria nuevaCadeteria = new Cadeteria(); 
 
-    //     List<Cadete> listProduc = new List<Cadete>();
-    //     string json = File.ReadAllText(nombreArchivo);
-    //     listProduc = JsonSerializer.Deserialize<List<Cadete>>(json);
+        return nuevaCadeteria;
 
-    //     return listProduc;
-
-    // }
+    }
+  
     public override List<Cadete> cargarCadetes(string nombreArchivo)
     {
         if (existeArchivo(nombreArchivo))

@@ -21,6 +21,12 @@ public class Cadeteria
         lisPedCadeteria = new List<Pedidos>();
 
     }
+    public Cadeteria ( string pnombre, string ptelefono){
+        this.nombreCadeteria = pnombre; 
+        this.telefonoCadeteria = ptelefono;
+        cadetes = new List<Cadete>();
+        lisPedCadeteria = new List<Pedidos>();
+    }
     public Cadeteria(List<Cadete> LisCadetes)
     {
         this.cadetes = LisCadetes;
@@ -28,20 +34,29 @@ public class Cadeteria
         lisPedCadeteria = new List<Pedidos>();
 
 
+   }
+    // alta pedido llamando a la funcion del objeto cadete q a su vez llama a la funcion del obj pedido
+
+   public string NombreCadeteria { get ; set; }
+    public string TelefonoCadeteria { get; set; }
+    public List<Cadete>? Cadetes {  get => cadetes; set => cadetes = value; }
+   
+    public List<Pedidos> getListaPedidos()
+    {
+        return this.lisPedCadeteria;
     }
+    public List<Cadete> getListaCadetes()
+    {
+        return this.cadetes;
+    }
+  
+  
     public void asignarPedidosTesting (List<Pedidos> pedidos){
         this.lisPedCadeteria = pedidos;
 
     }
-    public Cadeteria(List<Cadete> LisCadetes, string nombre, string telefono)
-    {
-        this.cadetes = LisCadetes;
-        this.nombreCadeteria = nombre;
-        this.telefonoCadeteria = telefono;
-        lisPedCadeteria = new List<Pedidos>();
+  
 
-    }
-    // alta pedido llamando a la funcion del objeto cadete q a su vez llama a la funcion del obj pedido
     public void altaPedidoCadeteria( string observacion, string nomcli, string clidire, string cliTelefono, string cliDatRef)
     {
 
@@ -100,23 +115,7 @@ public void mostrarPedidosPorEStado(int estado)
 
 
     }
-    public string NombreCadeteria { get ; set; }
-    public string TelefonoCadeteria { get; set; }
-    public List<Cadete>? Cadetes {  get => cadetes; set => cadetes = value; }
-    /*public void CargaInicialCadetes(List<Cadete> LisCadetes)
-    {
-        this.cadetes=LisCadetes;    
-    }
-*/
-    public List<Pedidos> getListaPedidos()
-    {
-        return this.lisPedCadeteria;
-    }
-    public List<Cadete> getListaCadetes()
-    {
-        return this.cadetes;
-    }
-  
+ 
      public void asignarPedidos(int idPedido, int idCadete)
     {
          var pedido = this.lisPedCadeteria

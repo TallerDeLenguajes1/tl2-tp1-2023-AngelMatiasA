@@ -165,9 +165,12 @@ public class interfaz
 
      public void cargarDatosCsv(){
         datosCsv = new AccesoCSV();
-        cadeteria = new Cadeteria();
+        cadeteria = datosCsv.cargarCadeteria("Cadeteria.csv");
         cadeteria.Cadetes = datosCsv.cargarCadetes("Cadete.csv");
         cadeteria.asignarPedidosTesting(datosCsv.CargarPedidos("Pedidos.csv"));
+        Console.WriteLine("el nombre de la cadeteria es "+ cadeteria.NombreCadeteria);
+        
+        Console.WriteLine("el telefono de la cadeteria es "+ cadeteria.TelefonoCadeteria);
     }
     
 }

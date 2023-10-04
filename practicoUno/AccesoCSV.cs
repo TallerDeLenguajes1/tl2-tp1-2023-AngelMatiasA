@@ -18,6 +18,28 @@ public class AccesoCSV: AccesoADatos
   
     
 
+    public override Cadeteria cargarCadeteria(string nombreArchivo){
+        Cadeteria nuevaCadeteria = new Cadeteria(); 
+        if (existeArchivo(nombreArchivo))
+        {
+            using (StreamReader lector = new StreamReader(nombreArchivo) )
+            {
+                string pirmeraLinea = lector.ReadLine();
+                Cadete nuevoCadete = new Cadete();
+                var linea = lector.ReadLine(); 
+                var values = linea.Split(';');
+                nuevaCadeteria.NombreCadeteria= values[0];
+                nuevaCadeteria.TelefonoCadeteria= values[1];
+             
+                
+            }
+            
+        }
+
+        return nuevaCadeteria;
+
+    }
+
 
      public override List<Cadete> cargarCadetes(string nombreArchivo){
           List<Cadete> CadetesCsv =  new List<Cadete>();  
