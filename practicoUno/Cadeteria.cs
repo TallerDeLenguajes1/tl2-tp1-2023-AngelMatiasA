@@ -199,7 +199,6 @@ public void mostrarPedidosPorEStado(int estado)
             //pedido.ToString();
             Console.WriteLine(" \n *************************** \n");
              Console.WriteLine($"       pedido nro {pedido.NroPedido}");
-            //Console.Write($"Nombre del cliente: {pedido.NombreClien}. ");
             Console.WriteLine($"Estado: {pedido.Estado}. ");
              if(pedido.CadetePed != null){
               
