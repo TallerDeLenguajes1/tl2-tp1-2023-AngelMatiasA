@@ -20,7 +20,32 @@ public class interfaz
 
 
     public void inicializar(){
-        cargarDatos();  
+        bool correcto = false;
+        int op = 0;
+        do
+        {
+            
+            Console.WriteLine("ingrese: \n  1) para cargar datos desde csv \n " +
+            " 2) cargar desde Json ");
+            correcto = int.TryParse(Console.ReadLine(), out op);
+            if (correcto && op!= 1 && op!=2)
+            {
+                correcto = false;
+                Console.WriteLine("el numero debe ser 1 o 2, intente de nuevo");
+                
+            }
+            
+        } while (!correcto);
+        if (op == 1)
+        {
+            cargarDatosCsv();
+            
+        }
+        else 
+        {
+            cargarDatosJson();  
+
+        }    
         do
         {
             Console.WriteLine("ingrese: \n  1) dar de alta pedidos \n " +
@@ -129,18 +154,18 @@ public class interfaz
 }
 
 
-    public void cargarDatos(){
-        datos = new AccesoCSV();
+    public void cargarDatosJson(){
         datosJson = new AccesoJSON();
-        // cadeteria = new Cadeteria(datos.cargarCadetes("Cadete.csv"));
+        datos = new AccesoCSV();
         cadeteria = new Cadeteria(datosJson.cargarCadetes("Cadete.json"));
-        
         // si declaro al obj del tipo padre, no puede usar metodos propios de la clase hija?
         cadeteria.asignarPedidosTesting(datos.CargarPedidos("Pedidos.csv"));
-       
+    }
 
-
-
+     public void cargarDatosCsv(){
+        datos = new AccesoCSV();
+        cadeteria = new Cadeteria(datos.cargarCadetes("Cadete.csv"));
+        cadeteria.asignarPedidosTesting(datos.CargarPedidos("Pedidos.csv"));
     }
     
 }

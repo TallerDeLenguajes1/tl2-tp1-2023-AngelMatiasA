@@ -27,6 +27,7 @@ public class AccesoCSV: AccesoADatos
            using(StreamReader lector = new StreamReader(nombreArchivo))
             {
                 string pirmeraLinea = lector.ReadLine();
+                int id = 1;
              while (!lector.EndOfStream  )
              { 
                 Cadete nuevoCadete = new Cadete();
@@ -35,6 +36,8 @@ public class AccesoCSV: AccesoADatos
                 nuevoCadete.Nombre = values[0];
                 nuevoCadete.Direccion = values[1]; 
                 nuevoCadete.Telefono = values[2];  
+                nuevoCadete.Id = id; 
+                id++;
                 CadetesCsv.Add(nuevoCadete);
              }
             }
