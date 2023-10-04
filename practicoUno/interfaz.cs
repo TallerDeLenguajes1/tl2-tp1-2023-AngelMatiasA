@@ -157,10 +157,14 @@ public class interfaz
     public void cargarDatosJson(){
         datosJson = new AccesoJSON();
         datosCsv = new AccesoCSV();
-        cadeteria = new Cadeteria();
+        cadeteria = datosJson.cargarCadeteria("Cadeteria.json");
         cadeteria.Cadetes = datosJson.cargarCadetes("Cadete.json");
         // si declaro al obj del tipo padre, no puede usar metodos propios de la clase hija?
         cadeteria.asignarPedidosTesting(datosCsv.CargarPedidos("Pedidos.csv"));
+         Console.WriteLine("el nombre de la cadeteria es "+ cadeteria.NombreCadeteria);
+        
+        Console.WriteLine("el telefono de la cadeteria es "+ cadeteria.TelefonoCadeteria);
+        
     }
 
      public void cargarDatosCsv(){
