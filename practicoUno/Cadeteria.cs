@@ -130,25 +130,26 @@ public void mostrarPedidosPorEStado(int estado)
             //cambie solo esta parte p asignarle el cadete a pedido
             pedido.CadetePed = cadete;
             pedido.Estado = pedido.getarreglosEstados(1);
-            Console.WriteLine($"Pedido nro {pedido.NroPedido} asignado al cadete id" +
-                $"{cadete.Id}: {cadete.Nombre}");
+            // Console.WriteLine($"Pedido nro {pedido.NroPedido} asignado al cadete id" +
+            //     $"{cadete.Id}: {cadete.Nombre}");
         }
     }
     }
 
 
     
-    public void mostrarCadetes()
+    public List<Cadete> mostrarCadetes()
     {
-        foreach (Cadete Cadete in this.cadetes)
-        {
-            Console.WriteLine("********************************************* \n");
-            Console.WriteLine($"        Cadete nro {Cadete.Id}");
-            Console.WriteLine($"Nombre: {Cadete.Nombre}. ");
-            Console.WriteLine($"Direccion: {Cadete.Direccion}. ");
-            Console.WriteLine($"Telefono: {Cadete.Telefono}. ");
-        }
-        Console.WriteLine("********************************************* \n");
+        // foreach (Cadete Cadete in this.cadetes)
+        // {
+        //     Console.WriteLine("********************************************* \n");
+        //     Console.WriteLine($"        Cadete nro {Cadete.Id}");
+        //     Console.WriteLine($"Nombre: {Cadete.Nombre}. ");
+        //     Console.WriteLine($"Direccion: {Cadete.Direccion}. ");
+        //     Console.WriteLine($"Telefono: {Cadete.Telefono}. ");
+        // }
+        return this.cadetes;
+        // Console.WriteLine("********************************************* \n");
     } 
 
     //Mostrar un informe de pedidos al finalizar la jornada que incluya el monto ganado
