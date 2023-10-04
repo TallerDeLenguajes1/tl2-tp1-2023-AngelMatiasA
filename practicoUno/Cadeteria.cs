@@ -201,14 +201,11 @@ public void mostrarPedidosPorEStado(int estado)
              Console.WriteLine($"       pedido nro {pedido.NroPedido}");
             //Console.Write($"Nombre del cliente: {pedido.NombreClien}. ");
             Console.WriteLine($"Estado: {pedido.Estado}. ");
-             if(pedido.getIdCadetePedidos() != 0){
-                foreach (Cadete portadorPedido in this.cadetes)
-                {
-                    if (portadorPedido.Id == pedido.getIdCadetePedidos())
-                    {
-                        Console.WriteLine($"Pedido enviado con {portadorPedido.Nombre}. ");
-                    }
-                }
+             if(pedido.CadetePed != null){
+              
+             Console.WriteLine($"Pedido enviado con {pedido.CadetePed.Nombre}. ");
+                   
+              
 
             }
              pedido.VerDireccionCliente();
